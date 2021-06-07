@@ -1,9 +1,27 @@
 # Bioinformatics-Internship
+-------
+My name is **Namikelwa Dorcus**,
+I'm a Biochemistry student doing my internship at *Icipe*,
+My interests are in genomics,epigenomics and proteomics.
 
-This is **Namikelwa Dorcus**
+-------
+# Short Term Vision
 
-I'm a Biochemistry student doing my internship in *Icipe*
+To be competent with github.
 
-**short term vision**
+To be comfortable working with R and Linux operating system.
 
-To be competent with github
+To gain all the basic skills for bioinformatics to help me pursue my future goals.
+
+-------
+# Long Term Vision
+
+To pursue a masters and a phd in bioinformatics.
+
+To venture into science and research.
+
+# Roadmap
+
+
+
+
