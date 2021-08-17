@@ -29,9 +29,8 @@ fastq-dump --gzip --split-files <Accession number>
 ```
 Compiling the data
 ```
-mkdir raw-data
-cd raw-data
-for i in $(SraAcclist.txt);    # path to the SraAcclist.txt that contains a list of the accesion numbers
+
+for i in $(<input>);    # path to the SraAcclist.txt that contains a list of the accesion numbers
 do
     echo $i #prints the acc numbers to the commandline
     fastq-dump --gzip --split-files $i  #fastq-dump gets data in fastq format 
@@ -44,11 +43,11 @@ After having the raw reads with you quality analysis is done so as to know the q
 **fastqc** checks the quality of the raw reads from high throughput sequencing platforms like Illumina.It provides one output file for each sample,a html report summary of the quality of reads in graphs and tables.The html report can be viewed on the browser and gives information about your sequences per sample.
 **multiqc** makes fastqc output more manageable by compiling them and generating one report.
 it has 2 outputs a  single HTML report with plots to visualize and compare various QC metrics between the samples and a data file
-It can be done on the forward as  well as reverse reads 
+It can be done on the forward as  well as reverse reads   
 After fastqc the outputs the 
 ```
 fastqc -o <path to output dir>  <path to raw data with fastq.gz>
-     or #after fastqc the output has fastqc.gz extension
+           or      
 for i in `<path to the rawreads>`;
 do
   	fastqc $i
@@ -61,10 +60,9 @@ multiqc ./R2_fastqc.gz
 
 ## Trimming
 Filtering/trimming
-This is a step done when the quality of your reads is not good 
-Tools utilized here include trimmomatic-a tool for trimming Illumina sequenced data reads,Cutadapt-a tool for quality control of high-throughput sequencing reads..the functions include an adapter, primer, and poly-A tail removal.bowtie e.t.c
-
-low quality reads together with adapters are removed after quality assessment.**Trimmomatic** is a  Java executable software used to trim and crop reads. 
+This is a step done when the quality of your reads is not good     
+Tools utilized here include trimmomatic-a tool for trimming Illumina sequenced data reads,Cutadapt-a tool for quality control of high-throughput sequencing reads..the functions include an adapter, primer, and poly-A tail removal.bowtie e.t.c       
+Low quality reads together with adapters are removed after quality assessment.**Trimmomatic** is a  Java executable software used to trim and crop reads.     
 ```
 #It's crusial to provide the path to your trimmomatic java jar to check if you have your java jar use this command:
  compgen -ac | grep trimmomatic
@@ -76,70 +74,74 @@ for i in *_1.fastq.gz;
 do
     name=$(basename ${i} _1.fastq.gz) #flag -s for suffix can be used after basename followed by the suffix then ${i}
     trimmomatic PE -threads 20
-                   ${i} ${name}_2.fastq.gz\
-                   ${name}_1.trim.fastq.gz ${name}_1un.trim.fastq.gz \
-                    ${name}_2.trim.fastq.gz ${name}_2un.trim.fastq.gz \
+                   ${i} ${name}_2.fastq.gz\#input files
+                   ${name}_1.trim.fastq.gz ${name}_1un.trim.fastq.gz \ #output files for forward reads
+                    ${name}_2.trim.fastq.gz ${name}_2un.trim.fastq.gz \ #output files for reverse reads
                     HEADCROP:11
 done
 PE - paired end
 HEADCROP -removes the first 11 bases of the reads
 
 ```
-The trimmed reads are then checked for quality 
-fastqc
-multiqc
+The trimmed reads are then checked for quality   
+fastqc  
+multiqc   
 
 ## Mapping
-Requires a reference genome(obtained from database) and the trimmed reads/raw reads if trimming wasn't done
+Requires a reference genome in fa format (obtained from database) and the trimmed reads/raw reads if trimming wasn't done     
 tools used include hisat2 which requires building an index for the reference genome 
-**hisat2** is a fast and sensitive splice-aware aligner that compresses the genome using an indexing scheme to reduce the amount of space needed to store the genome. This also makes the genome quick to search, using a whole-genome index.We use samtools to convert the output file from mapping to bam format and to index the bam files.Indexing creates a searchable index of sorted bam files required in some programs.
+**hisat2** is a fast and sensitive splice-aware aligner that compresses the genome using an indexing scheme to reduce the amount of space needed to store the genome. This also makes the genome quick to search, using a whole-genome index.    
+We use samtools to convert the output file from sam to bam format(downsream anlysis requiresbam file) and to index the bam files.Indexing creates a searchable index of sorted bam files required in some programs.     
 
 ```
-wget https://vectorbase.org/common/downloads/Current_Release/AgambiaePEST/fasta/data/VectorBase-53_AgambiaePEST_AnnotatedCDSs.fasta
+wget <input link to the reference fasta file>
 
 #Building a reference genome index
-hisat2-build -p25 ./VectorBase-53_AgambiaePEST_AnnotatedCDSs.fasta  ../hisat-index/VectorBase-53_AgambiaePEST.idx
+hisat2-build -p25 <input path to fasta file>  <output path with an.idx extension>
 
 #Run hisat2 using indexed reference
-mkdir Alignment_hisat
-for i in $(cat ../SraAccList.txt);#provide path the accesion files
+
+for i in $(<input file>);#provide path to the trimmed reads
 do
    echo ${i}#just to find out from the cmd line whether the script is working
-   hisat2 -p25 -x ../hisat-index/VectorBase-53_AgambiaePEST.idx\
-               -1 ${i}_1.fastq.gz -2 ${i}_2.fastq.gz\
-               -S Alignment_hisat/${i}_hisat.sam
-   samtools view -Sb Alignment_hisat/${i}_hisat.sam  | samtools sort  > Alignment_hisat/${i}_hisat_sorted.bam
-   samtools index Alignment_hisat/${i}_hisat_sorted.bam
-   rm Alignment_hisat/${i}_hisat.sam 
+   hisat2 -p25 -x <path to the indexed ref genome>
+               -1 ${i}_1.fastqc.gz -2 ${i}_2.fastqc.gz\ #forward and reverse reads and adding extensions
+               -S <path to aligned reads>/${i}_hisat.sam # -S to tell that the file is in sam format aand adding the sam extension
+   samtools view -Sb <path to aligned reads>/${i}_hisat.sam  | samtools sort  > <output path>/${i}_hisat_sorted.bam
+   samtools index <output path>/${i}_hisat_sorted.bam
+   rm <output path>/${i}_hisat.sam # we are removing sam files because they are huge hence take alot of space
 done
 ```
 
 
 **STAR Aligner**(Spliced Transcripts Alignment to a Reference)
-
-STAR is a splice aware aligner designed to specifically address many of the challenges of RNA-seq data.It shows high accuracy and mapping speed.Alignemnt in STAR involves two steps;
+STAR is a splice aware aligner designed to specifically address many of the challenges of RNA-seq data.It shows high accuracy and mapping speed.To generate an idx file it requires
+a ref genome file in fasta format as well as aref gff/gtf file found together in the database.  
+Alignemnt in STAR involves two steps;
 
 1. Creating genome index
 ```
 STAR --runThreadN 6  # number of threads\
     --runMode genomeGenerate \
-    --genomeDir ./starr #path to store genome indices\
-    --genomeFastaFiles VectorBase-53_AgambiaePEST_Genome.fasta \
-    --sjdbGTFfile VectorBase-53_AgambiaePEST.gff \
+    --genomeDir <input>r #path to store genome indices\
+    --genomeFastaFiles <input ref genome> \
+    --sjdbGTFfile <input corresponding gff file>\
     --sjdbOverhang 99 #readlength-1 --sjdbGTFtagExonParentTranscript gene
+    
+    # --sjdbGTFtagExonParentTranscript gene -allows star to use a gff file coz appparently it requires a gtf file
+    
 ```
 
 2. Mapping reads to the genome
 ```
-mkdir alignments
-for i in $(cat SraAcclist.txt);
+for i in $(<input file/path to the file>);
 do
-    STAR --genomeDir starr \
-    --readFilesIn  ${i}_1.fastq.gz ${i}_2.fastq.gz\
+    STAR --genomeDir  \ #path to indexed ref genome
+    --readFilesIn  ${i}_1.fastq.gz ${i}_2.fastq.gz\#forward and reverse reads and provide the extensions
     --readFilesCommand zcat  \
-    --outSAMtype BAM SortedByCoordinate \
+    --outSAMtype BAM SortedByCoordinate \# bam file
     --quantMode GeneCounts \
-    --outFileNamePrefix alignments/${i}
+    --outFileNamePrefix <output dir>/${i}
 done
 #zcat decompress the files
 
@@ -149,10 +151,15 @@ done
 
 Once you have your aligned reads,**htseq** is used to give counts of reads mapped to each feature.A feature is an interval on a chromosome.
 ```
-htseq-count -t exon -i gene_id -f bam *._hisat_sorted.bam  VectorBase-53_AgambiaePEST.gff > htseq/counts.txt
+htseq-count -t exon -i gene_id -f bam <input bam file/s>  <input gff file>  > <output file with a txt extension>
+#-t featuretype
+#-i attribute
+#-f format
+#a wild card can be used for multiple bam files
 ```
 
 ## Differential analysis
 
 Differential analysis involves using read counts to perform statistical analysis to discover quantitative changes in gene expression levels between experimental groups;exposed and non-exposed.**DESeq2** is used for differential analysis. 
+This is usually done in R
 
