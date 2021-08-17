@@ -1,15 +1,15 @@
-# RNA-seq ANALYSIS
+# RNA-seq basic analysis steps
 
-RNA-seq is used for differential gene expression data analysis.It offers transcriptional profiling of data
-dteps ivolved to do the analsis:
+RNA-seq is used for differential gene expression data analysis.It offers transcriptional profiling of data  
+Steps involved to do the analysis:  
 
 ## Obtaining data
-Raw data can be obtained from online repositories/databases i.e NCBI
-If for instance you have many datasets you can access the accession lists using esearch together with your experiment id on the command line or you can go to the database i.e NCBI select the datasets and download the acc numbers into a txt file.
-Then the data can be downloaded with the help of commandline arguments wget,fastq-dump,fasterq-dump
+Raw data can be obtained from online repositories/databases i.e NCBI        
+If for instance you have many datasets you can access the accession lists using esearch together with your experiment id on the command line or you can go to the database i.e NCBI select the datasets and download the acc numbers into a txt file.           
+Then the data can be downloaded with the help of commandline arguments *wget,fastq-dump,fasterq-dump*
 
-Fetching raw data from NCBI
-The first step is to download the accession list into a txt file from the command line using **esearch**
+Fetching raw data from NCBI       
+The first step is to download the accession list into a txt file from the command line using **esearch**         
 ```
 esearch -db sra -query <input exp id> | efetch --format runinfo | cut -d "," -f 1 > SraAccList.txt # provide the txt output file
 
@@ -18,7 +18,7 @@ esearch -db sra -query <input exp id> | efetch --format runinfo | cut -d "," -f 
 #efetch downloads selected records in a style designated by -format
 # -f flag is used to select the field you want i.e field with the accession numbers
 ```
-Once you have the accession list,the next step is to download the data.
+Once you have the accession list,the next step is to download the data.          
 **fastq-dump** is a tool in SRAtoolkit used for downloading sequenced reads from NCBI Sequence Read Archive(SRA).The data is dowloaded in fastq format.Here we are using the two options *--gzip* for compressing the sequence reads and *--split-files* to give both forward and reverse reads since the reads are from Illumina platform hence they are interleaved.
 
 Getting the data one data-set at a time
@@ -36,7 +36,7 @@ do
     fastq-dump --gzip --split-files $i  #fastq-dump gets data in fastq format 
 done
 ```
-## Quality analysis
+## Pre-Quality analysis
 quality check
 After having the raw reads with you quality analysis is done so as to know the quality of your data for better downstream analysis.
 
@@ -83,14 +83,15 @@ PE - paired end
 HEADCROP -removes the first 11 bases of the reads
 
 ```
+## Post-Quality analysis  
 The trimmed reads are then checked for quality   
 fastqc  
 multiqc   
 
 ## Mapping
-Requires a reference genome in fa format (obtained from database) and the trimmed reads/raw reads if trimming wasn't done     
-tools used include hisat2 which requires building an index for the reference genome 
-**hisat2** is a fast and sensitive splice-aware aligner that compresses the genome using an indexing scheme to reduce the amount of space needed to store the genome. This also makes the genome quick to search, using a whole-genome index.    
+Requires a reference genome in fa format (obtained from database) and the trimmed reads/raw reads if trimming wasn't done        
+tools used include hisat2 which requires building an index for the reference genome         
+**hisat2** is a fast and sensitive splice-aware aligner that compresses the genome using an indexing scheme to reduce the amount of space needed to store the genome. This also makes the genome quick to search, using a whole-genome index.          
 We use samtools to convert the output file from sam to bam format(downsream anlysis requiresbam file) and to index the bam files.Indexing creates a searchable index of sorted bam files required in some programs.     
 
 ```
