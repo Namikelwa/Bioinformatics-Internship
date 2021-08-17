@@ -1,8 +1,11 @@
 # Bioinformatics-Internship
 -------
-My name is **Namikelwa Dorcus**,
-I'm a Biochemistry student doing my internship at *Icipe*,
-My interests are in Genomics and Data science.
+My name is **Namikelwa Dorcus**.   
+I'm a Biochemistry student from Kenyatta University doing my internship at *Icipe*.
+
+# Interests
+-------
+To be a Genomics Researcher
 
 -------
 # Short Term Vision
@@ -26,11 +29,14 @@ To be an admirable team leader.
 
 --------
 # Roadmap
-Learn about collaborative tools *github* and *slack*  
+Learn about collaborative tools *github* and *slack*
+
 Introduction to Bioinformatics  
-To have the knowledge and skills on Bioinformatics tools,resources and their usage.  
+  
 Programming languages *Linux*, *Python* and *R*   
-Work on a Reproducible genomic data analysis project    
+
+Work on a Reproducible genomic data analysis project 
+
 Work on a mini-project
 
 
