@@ -66,8 +66,13 @@ read -sp "Tell me your password: " password
 echo -e "\nHi ${username}, your password is ${password}"
 
 ```
+The ‘-e‘ option in Linux acts as interpretation of escaped characters that are backslashed.
 
-* echo options
-man echo
-https://www.gnu.org/software/bash/manual/html_node/Escape-Character.html
-https://www.gnu.org/software/bash/manual/html_node/Escape-Character.htm
+
+
+
+* To get the use of echo options
+
+   'man echo' in the terminal
+   https://www.gnu.org/software/bash/manual/html_node/Escape-Character.html
+
