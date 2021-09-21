@@ -22,5 +22,27 @@ If the user enters a value other than Premium, Ideal or Very Good, return Invali
 Otherwise, count the number of diamonds (rows) which have the user-defined cut. Hint: look at the usage for grep to find an option that will count the number of lines which match a given pattern.
 
 Please try to answer the questions yourself first and then compare the results with other learners. Finally, you can find solutions in the download area.
+```
 
+#!/usr/bin/env bash
 
+read -p "Enter a diamond cut: " quality
+
+if [[ ${quality} == "Fair" ]] || [[ ${quality} == "Good" ]]
+
+then
+
+echo "Insufficient quality to proceed"
+
+elif [[ ${quality} != "Ideal" ]] && [[ ${quality} != "Very Good" ]] && [[ ${quality} != "Premium" ]]
+
+then
+
+echo "Invalid cut"
+
+else
+
+grep -c "${quality}" Diamonds.csv
+
+fi
+```
