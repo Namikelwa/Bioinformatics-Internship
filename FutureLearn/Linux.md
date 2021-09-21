@@ -447,3 +447,213 @@ case $animal in
       	;;
 esac
 ```
+
+## For Loops
+
+What is a loop? A loop is a construct which allows you to repeatedly execute the same commands. We will be discussing three types of loops: for loops, while loops and until loops.
+
+Let’s start by looking at for loops. The basic syntax for a for loop is:
+
+for variable in ${list}
+do
+    	# Execute some commands
+done
+We can define a list like so:
+
+my_list="item1 item2 item3"
+As a simple example, let’s create a list of fruits and use a for loop to return each item from our list:
+
+fruits="apples pears oranges"
+for fruit in ${fruits}
+do
+    	echo ${fruit}
+done
+This will output:
+
+apples
+pears
+oranges
+We can also use a for loop to iterate over a series of numbers. In this example, we’ll process the numbers 1 – 3 using a sequence expression. Here, you’ll see the range is specified by a beginning number (1) and an ending number (3) separated by ‘..’. This indicates that we want the sequence of numbers from the beginning to the ending number inclusive i.e. 1, 2 and 3.
+
+for n in {1..3}
+do
+    	echo ${n}
+done
+This will output:
+
+1
+2
+3
+A common use of for loops is to iterate over the contents of a directory. Here is an example of how to list all files in the current directory:
+
+for file in *
+do
+    	echo ${file}
+done
+Here we use ‘*’ as a wildcard to ask for all files and directories. We could extend this to look text files:
+
+for file in *.txt
+do
+    	echo ${file}
+done
+This would return only those files that have a .txt file extension.
+
+Finally, we’ll introduce you to the for loop syntax that uses three expressions: an initial value, a terminal value and an increment/decrement. Notice here that the increment uses the ‘++’ notation which simply means add 1.
+
+for (( i=1; i<=3; i++ ))
+do
+    	echo $i
+done
+This example returns the same output as our earlier number series.
+
+1
+2
+3
+Your task
+Create a for loop which iterates from 1 to 5 in increments of 1. If the value is 2 return “fizz” otherwise, return “buzz”.
+```
+for (( i=1; i<=5; i++ ))
+
+do
+
+if [[ ${i} -eq "2" ]]
+
+then
+
+echo "fizz"
+
+else
+
+echo "buzz"
+
+fi
+
+done
+```
+## While Loop and Until Loop
+Both for loops and while loops are very similar. Typically, we use for loops where we know exactly how many iterations we need – i.e. they have a definitive start and end point. On the other hand, while loops are used where we don’t know the limitations on tasks such as read in a file or asking a user for input. They just keep iterating as long as the specified condition has been met.
+
+The basic syntax for a while loop looks like this:
+
+while [condition]
+do
+    	# Commands to run
+done
+First, let’s look at how not to do a while loop:
+
+i=1
+while [[ $i -eq 1 ]]
+do
+    	echo "hi"
+done
+This is what’s known as an infinite loop because the condition will always return true – i.e. nothing is changing. In this example, “hi” will just keep being printed to the terminal until we force it to stop using Ctrl+C on our keyboard.
+
+So, that was how to use while loops in the wrong way. But, what do they look like when they are being used properly:
+
+i=1
+while [[ $i -le 3 ]]
+do
+   echo "$i"
+   (( i++ ))
+done
+What we’re doing here is setting our variable to have an initial value of 1. When the loop begins, our variable is 1 (i.e. less than 3) and so the condition returns true. That means that we’re going to execute the code body, returning our variable value, 1 to the terminal. Next, we increment our variable value from 1 to 2 using the ++ notation. This continues while our variable has a value less than or equal to 3.
+
+The result:
+
+1
+2
+3
+Another common use for while loops is reading in the contents of a file. Here is an example:
+
+while read data
+do
+   echo "${data}"
+done < infile.txt
+This is what is known as a while loop. What do we mean by this? In this example, the while loop will only keep iterating while there are lines to be read from the given input file. Here, infile.txt is the name of the file that we are going to be looping over. The read command will process the file, line by line, into the data variable. Once it reaches the end of the file, the while loop will be terminated.
+
+Until loop
+We just looked at an example of a while loop. Now, we’re going to look at run-until loops. The main difference is that while loops are designed to run while a condition is satisfied and then terminate once that condition returns false. On the other hand, until loops are designed to run while the condition returns false and only terminate when the condition returns true.
+
+The structure of until loops is almost identical to that of a while loop:
+
+until [condition]
+do
+    	# Commands to run
+done
+For example, this loop would run until the variable is greater than 3:
+
+i=1
+until [[ $i -gt 3 ]]
+do
+    	echo $i
+    	((i++))
+done
+This would output:
+
+1
+2
+3
+
+
+## Bash Functions
+
+When you’re writing Bash scripts, you’ll often find that there are repetitive tasks. Instead of copying and pasting the same code to multiple places in your scripts, try using a function.
+
+Functions are a great way of producing reusable code! They are essentially a set of commands that can be called as many times as you need in your script. What’s even better is that functions are not unique to Bash, they’re a core component of many other programming languages too.
+
+Bash function syntax is pretty straightforward. We start off by defining the function name, followed by parentheses. The commands that we want to execute are found between the curly brackets and are known as the body of the function.
+
+function my_function() {
+    	#some code
+}
+There is an alternative syntax where you don’t have to prefix that first line with function:
+
+my_function() {
+    	#some code
+}
+However, it is much easier to pick out our functions if we use the previous syntax. It’s also a good idea to make sure that the names of your functions are relative and descriptive so that you can quickly see what they’re going to do.
+
+When we define a function, we are not executing it. Let’s use a simple toy example to demonstrate where we are using a function to return “Hello world” back to the terminal. We’ll call our function say_hello. You can see that we don’t execute the code in the function body until we specifically call (or execute) the function with say_hello.
+
+#!/usr/bin/env bash
+ 
+# Define a function to print "hello world"
+function say_hello() {
+    	echo "Hello world"
+}
+ 
+# Execute the say_hello function
+say_hello
+This would output:
+
+Hello world
+We can adapt out function to take arguments using reserved variables. To access the first argument given to the function, we use the variable $1. Let’s tweak our script to use an argument, our name, that is provided to our say_hello function.
+
+#!/usr/bin/env bash
+ 
+# Define a function to print "hello world"
+function say_hello() {
+    	echo "Hello $1"
+}
+ 
+# Execute the say_hello function
+say_hello "Victoria"
+This would output:
+
+Hello Victoria
+Functions are one of the best ways to produce scalable and readable code. One general rule of thumb is not to make your functions too big. You can call a function within a function, so, break each function down into small, clear tasks.
+
+Your task
+Create a function called file_exists taking the first argument (a filename) which it uses to see if the file exists. If it doesn’t, return “File does not exist: “, followed by the filename.
+
+Note: you can use the “!” notation when you want to check a negative.
+
+If file exists:
+
+if [[ -e $1 ]]
+
+If file does not exist:
+
+if [[ ! -e $1 ]]
+
+Please try to answer the questions yourself first and then compare the results with other learners. Once you’ve tried the exercise, you can find solutions in the download area.
