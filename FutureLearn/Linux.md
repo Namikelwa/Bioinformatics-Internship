@@ -657,3 +657,41 @@ If file does not exist:
 if [[ ! -e $1 ]]
 
 Please try to answer the questions yourself first and then compare the results with other learners. Once you’ve tried the exercise, you can find solutions in the download area.
+
+```
+file="no_file.txt"
+function file_exists() {
+ if [[ ! -e $1 ]]
+ then
+ echo "File does not exist: $1"
+ fi
+}
+file_exists "${file}"
+#Notice that we are checking to see that a file doesn't exist, not that it does.
+if [[ ! -e $1 ]]
+```
+#!/usr/bin/env bash
+
+# Define a function to check file
+
+function filecheck() {
+
+if [[ -e $1 ]]
+
+then
+
+echo "$1"
+
+elif [[ ! -e $1 ]]
+
+then
+
+echo "File does not exist: $1"
+
+fi
+
+}
+
+# Execute the filecheck function
+
+filecheck no-file.
