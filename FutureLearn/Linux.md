@@ -695,3 +695,302 @@ fi
 # Execute the filecheck function
 
 filecheck no-file.
+
+## Track the Progress of Your Script and Redirect Script Outputs and Errors
+
+Tracking the progress of your script
+Now, let us imagine you have a long and complex Bash script. You execute your script, it’s started running and you’ve gone off to make a cup of tea. Ten minutes later, you come back to check on its progress but, how do you know what’s going on and where you’ve gotten up to in your script?
+
+There are many different ways in which we can track the progress of our scripts. The simplest is to break your script down into sections and output a progress statement when you start and/or finish each section.
+
+For example, let’s set our name as a variable and count the number of characters it contains.
+
+#!/usr/bin/env bash
+ 
+# Set your name as a variable
+name="Victoria"
+ 
+echo "Counting number of characters in name"
+printf -- "${name}" | wc -m
+As expected, we have our progress statement and the number of characters in our name:
+
+Counting number of characters in name
+            8
+Now, while this may seem excessive given the simple example, it’s clear that once we start to build up our scripts, adding progress statements will be invaluable. Particularly when were discussing loops this week, where it’s possible for your scripts to get stuck in an infinite loop, failing to exit. In those situations, progress statements are absolutely essential for debugging!
+
+Discuss with your fellow learners:
+Can you see a situation where you would need to track the progress of your script?
+
+Redirecting script outputs and errors
+Despite your hardest efforts, sometimes your Bash scripts will do unexpected things. This is when we need to debug. If you have a long Bash script, it can be tricky to work out where things went wrong.
+
+To help with debugging, we can output progress statements at key points in our code e.g. “Reading in file: x”. However, these can easily fill up your terminal and become difficult to follow. A simple solution is to write these progress statements to one or more log files.
+
+Redirecting the output of scripts and commands to files
+Simply put, redirection is the mechanism by which we can send the output of a command or script to another place. When we want to capture the output from a command or script, we usually choose to redirect those outputs into a file.
+
+To redirect the outputs of a script, we can use the > symbol:
+
+script.sh > output.txt
+Redirection using the > symbol works not only for scripts, but any Bash command:
+
+echo "hello world" > hello.txt
+cat hello.txt
+hello world
+Linux streams and file descriptors
+Before we take an in depth look at how we redirect our outputs and errors to log files, we first need a crash course in Linux streams and file descriptors. These streams are handled like files – i.e. you can read from them and you can write to them.
+
+There are three streams you should be aware of:
+
+stdin (standard input)
+stdout (standard output)
+stderr (standard error)
+This sounds much more complicated than it really is. In a nutshell, stdout refers to the output from a command and stderr refers to the errors a command generates. The final stream, stdin refers to command line inputs which we’ll cover later in the week.
+
+Next, we need to understand file descriptors. A file descriptor is just a (positive) integer that represents an open file. Each of our Linux streams (i.e. stdin, stdout and stderr) has been allocated a unique number in order to identify them.
+
+All you need to remember is which of the ids below corresponds to each of the streams:
+
+0 => stdin
+
+1 => stdout
+
+2 => stderr
+
+I/O redirection
+To start understanding how these streams work, let’s look at redirecting the output from a script into a single file.
+
+Example script:
+
+#!/usr/bin/env bash
+ 
+# A script that tries to change directory
+ 
+echo "Changing to a directory that doesn't exist"
+cd foo
+As you can see, our script returns the printed progress statement and an error that tells us that the directory we’re trying to migrate to doesn’t exist on our filesystem.
+
+./script.sh
+Changing to a directory that doesn't exist
+script.sh: line 6: cd: foo: No such file or directory
+These two messages are being delivered to the terminal by two different Linux streams. The first message, our progress statement, is delivered via stdout. Meanwhile, the error message is delivered via stderr.
+
+Now, let’s see what happens when we try to redirect the outputs from that script into a file called output.txt:
+
+./script.sh > output.txt
+./script.sh: line 6: cd: foo: No such file or directory
+OK, so, we can see that the stdout has been redirected to our output file but, the error is still being displayed.
+
+cat output.txt
+Changing to a directory that doesn't exist
+Why is this? Well, when we use > to redirect to a file, by default, the system will only redirect the stdout.
+
+But, what about our errors being delivered via stderr, how can we capture those?
+
+To simplify things, let’s first look at how to redirect stdout and stderr to two different files. We’ll use the > symbol with our file descriptors (1 for stdout and 2 for stderr) to redirect our outputs to output.txt and our errors to error.txt respectively.
+
+./script.sh 1>output.txt 2>error.txt
+This command returns nothing back to our terminal. Using the cat command, we can see that, as expected, our outputs and errors have been written to output.txt and error.txt respectively.
+
+Our stdout (progress statement returned using echo): cat output.txt Changing to a directory that doesn’t exist
+
+And our stderr (errors):
+
+cat error.txt
+./script.sh: line 6: cd: foo: No such file or directory
+In order to redirect the stdout and the stderr to the same place, we need to use a new term: 2>&1. When we use this, we redirect using the same syntax as before, but add 2>&1 to the end of our command.
+
+This is how it works in practice:
+
+./script.sh > combined_output.txt 2>&1
+Now, if we look at our combined output file, we can see that we’ve captured both the stdout and the stderr.
+
+cat combined_output.txt
+Changing to a directory that doesn't exist
+./script.sh: line 6: cd: foo: No such file or directory
+
+Discuss with your fellow learners:
+
+Can you see a situation where you would need to track the progress of your script?
+
+Ans:
+
+For example, in transcriptomics, you want to output information for a gene of interest. You could want to find the gene name "PBANKA_etc" (this is Plasmodium berghei gene annotation), and then find if it's up or down regulated, by how much, etc. I would want to go until the end of the file (so an until loop) but I would want to have something in there to say how many times that gene is represented and then give me some output for each time it appears. The gene could be represented once or it could be represented hundreds of times in multiple RNA-seq datasets. If you have many samples, you would have to run the script for each file outputted by the sequencer. I'm probably not explaining it well, but processing NGS data can take ages and I would want a progress report!
+
+## Writing Robust Bash Scripts
+Sometimes, despite having the very best intentions, subtle issues can creep into your script causing it to fail with unintended consequences. Fortunately, there are commands available to help with minimising these issues. One of these is the set command.
+
+Let’s take a look at how the set command can help us write robust and secure Bash scripts.
+
+First, how does the set command work? Using the set command allows us to customise the environment in which our scripts are run.
+
+The general syntax for the set command is:
+
+set [options]
+There are more than a dozen options available for the set command. To view them, you can run the following command:
+
+help set
+In this article, we’ll be focusing on the most commonly used options.
+
+Using set -e to catch errors
+Sometimes, commands within your script may fail but, the downstream commands will continue to run. This can be extremely frustrating if you don’t see the error and assume that, as the script completed, everything has worked as expected.
+
+Here’s an example. First, we will try to change into a directory called foo and then list the contents of that foo directory. The key here is that the foo directory doesn’t actually exist so, we can’t get its contents.
+
+#!/usr/bin/env bash
+ 
+cd foo
+ls
+What happens when we run our script?
+
+script.sh: line 3: cd: foo: No such file or directory
+File1 File2
+Notice that our script generated an error when the system couldn’t find our foo directory. But, because there wasn’t an exit code, the remaining commands in the script also ran. Unfortunately, this listed the contents of our current working directory and not the foo directory as intended. Imagine if this was part of a long series of output commands and we missed the error….we may accidentally assume that our script ran correctly!
+
+Fortunately, the set -e command comes to our rescue by ensuring that the script will fail whenever an error occurs, no matter the exit code. Try adding set -e to the top of your script:
+
+#!/usr/bin/env bash
+ 
+set -e
+ 
+cd foo
+ls
+Bingo! This time, we can see that the script terminates as soon as it reaches the first error.
+
+script.sh: line 5: cd:foo: No such file or directory
+Using set -u to catch variables that don’t exist
+By default, when executing a script, Bash will just ignore variables which don’t exist. In most cases, you won’t want this behaviour as it can have unexpected consequences!
+
+In this example, we will first try to output a variable, $foo, which doesn’t exist and then try to output a simple string, bar.
+
+#!/usr/bin/env bash
+ 
+echo $foo
+echo bar
+When we run this script, we get the following output:
+
+bar
+Notice that the system outputs a blank line for echo $foo. This is because Bash is ignoring $foo as it doesn’t exist.
+
+If we want the script to exit with an error instead of continuing on silently, we can add the set -u command at the top of our script.
+
+#!/usr/bin/env bash
+ 
+set -u
+ 
+echo $foo
+echo bar
+This will result in our script exiting with the following error:
+
+script.sh: line 6:foo: unbound variable
+Notice, our script terminates before running the second echo command.
+
+Displaying executed commands while script is running with set -x
+Another default Bash behaviour is to only display results once a script has finished. This can be especially frustrating when you need to debug scripts that take a long time to run.
+
+Let’s take an example script that outputs two simple strings, foo and bar.
+
+#!/usr/bin/env bash
+ 
+echo foo
+echo bar
+The output from this script would be:
+
+foo
+bar
+Now, what if we want to know which command is producing each of the results? To find this out, we can use the set -x command which outputs the executed command before printing the command result.
+
+#!/usr/bin/env bash
+ 
+set -x
+ 
+echo foo
+echo bar
+Running this script would give the following output:
+
++ echo foo
+foo
++ echo bar
+bar
+As you can see, before executing each of the echo commands, the script first prints the command to the terminal, using a + to indicate that the output is a command. This can be especially handy when you want to debug long scripts.
+
+Combining set options in a single command
+Most of the time, you will want to use all of these options together. Instead of writing the commands out, one command per line, we can combine the options into a single command:
+
+set -eux
+Using the set command is essential to building robust Bash scripts. Not only is it part of good scripting practices but, will also save you a lot of time and frustration!
+
+
+## Good Practices
+
+For the most part, it’s easy to write Bash scripts. What’s really tricky is writing good Bash scripts.
+
+What do we mean by this? In short, we mean writing “clean code”. Clean code is:
+
+Easy for someone to pick up and understand
+Reusable
+Scalable
+Expects the unexpected
+There will always be situations where you write a script for a one-time only task. In these situations, people tend to cut corners and become more flexible with making a script scalable or reusable. It’s tempting, it is, we’ve all been there. But…inevitably, you’ll almost always need to do the same or similar task unexpectedly in the future. It takes time to write good code in all situations, but, I promise, it’s always worth it in the long run!
+
+Here we’ve put together a simple list of 12 good practices which you can try to follow. This is by no means an exhaustive list and I encourage you to read more widely and continually assess and develop your scripting practices.
+
+Plan ahead
+Most of your scripting headaches will be solved by planning ahead. Think about what you want your script to do and expect the unexpected. This means not only thinking about the “happy path” where everything proceeds as you expect it to, but also the exceptions. For example, what should it do if the file its processing is empty or doesn’t exist?
+
+2. Build your script in small steps
+
+Depending on the complexity of the task you’re trying to accomplish, your script may be very small or somewhat larger. Now, even for the most experienced of script writers, there can be a typo or other error in their first attempt. To avoid this, no matter the scale of your script, build it up in small stages and test as you go.
+
+3. Scale up slowly
+
+We don’t just need to consider building the process up step by step, but also the size of the data the script is handling. A simple rule of thumb is to get your script working for a single task first. Then, build up slowly until you reach the full scale of your dataset i.e. handle one file, then 10, then 100… This allows you to predict the resources you need to process the full dataset and get a rough idea of how long this process will take.
+
+4. Comment, comment, comment
+
+OK, I could start by saying that you can never have too many comments in a script. But, that’s not true, at some point you won’t be able to see the wood for the trees and your script will become unnecessarily bloated. There is no hard and fast rule on how many comments you should have in your scripts, it just comes down to common sense. Simply, make sure that you have enough information so that if someone, usually you, picks your script up in 6 months that they know what it does and have a rough idea of how it does it. This isn’t just true for shell scripting, but for almost every other type of programmatic scripting you may encounter.
+
+5. Don’t prolong the life of the script unnecessarily
+
+This is called script longevity and links back to expecting the unexpected. Earlier in the week we looked at using the set command to handle failures and errors. A script should never fall over quietly. Trigger an exit signal when the unexpected happens. This means that a script should exit on the first error and not blithely continue running unnecessarily or fall over without you realising it.
+
+6. Keep on top of variable management
+
+There are a lot of things to consider for variable management. First up is syntax. I like to use upper case for environment variables and lower case for local variables.
+
+MY_ENVIRONMENT_VARIABLE=1
+my_local_variable=2
+Depending on your preference you can use underscores or camel case. I prefer underscores as it keeps things consistent between variable types. But that’s up to you.
+
+my_underscore_example=1
+myCamelCaseExample=2
+Variable names should be meaningful – i.e. you should know straight away what they are referring to. And, as mentioned earlier in the week, use double quotes and curly braces to avoid issues with whitespace and wildcards in the variable value.
+
+7. Prevent code bloat by using functions
+
+Quite often you will want to repeat the same process multiple times within a script. We could just copy and paste the code, amending it to our needs. This is inefficient and will make for a longer script. Instead, we can wrap the code in a function so that the code we want to run is only located once in our script and is referenced using a function call anywhere it is needed. Like variables, functions should be meaningfully named. They should be small, only performing a limited, clear task.
+
+8. Don’t duplicate scripts
+
+It can be very tempting to put paths to data directly into your scripts. Then, when you come to use the script on the new dataset, copy the script, save it under a new name and update the dataset location to point at the new data. Please don’t do this. It’s worth investing the time in making your scripts reusable and scalable by using arguments and avoiding hard coded paths.
+
+cartoon depicting one person at the computer and another looking at that Pearson's screen over her/his shoulder saying oh my god, with a tip: never look at somebody else's computer
+
+Source: https://imgs.xkcd.com/comics/documents.png
+9. Keep debugging simple
+
+Scripts will fail, it’s inevitable. We’ve already mentioned expecting the unexpected, but what should you do when the unexpected actually happens? How do you know at what point your script failed? This is where logging comes in – print everything your script is doing back to the system. That way, when it fails, you know at which point it stopped working and will have a much easier time debugging the code.
+
+10. Clean up after yourself
+
+This is simple. If you generate intermediate or temporary files, make sure that you remove them when you’ve finished with them. This should be built into the script itself and not done an afterthought once it’s run.
+
+11. Make your code easy to read
+
+Digestible code is always easier to work with and maintain. To quote Martin Fowler: “Any fool can write code that a computer can understand. Good programmers write code that humans can understand.”. To help, you can use linters to look over your scripts and give feedback on their readability/formatting. One of the widely used online tools for Bash script linting is https://www.shellcheck.net/.
+
+12. Don’t walk away from new scripts
+
+It’s oh so tempting to hit “go”, set your nice, shiny new script running…then go off and make a cup of tea. Don’t. Sit back down and make sure it runs OK for the first couple of times. Why the first couple and not just the first time I hear you ask? Because, it will inevitably be the third or fourth time you run the script that it will fail in a spectacularly dramatic fashion. I like a cup of tea as much as the next person but, please, make it before you start running your script!
+
+
