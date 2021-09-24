@@ -1320,6 +1320,140 @@ solution such as simply clicking on File, for example, to open it, without havin
 in R to do so.
 [00:06:51.88] In the next video, or step, we will start learning together how to use RStudio. 
 
+## Bioinformatics - Lets begin with RStudio
+[00:00:07.12] In this new step let's see how to start working now with RStudio and how the
+RStudio interface is easing a lt of the process of working in R-based environment again. As an
+example, when we see together in the first part of the video, how to open a new project, and then
+in the second part, how to instal and use packages. So opening a new project before you start
+work will allow you to do many things.
+[00:00:34.26] First, it will allow you to keep track of a certain analysis you did, so it will allow
+you, for example, to retrieve very easily, substeps that you've been through and that worked for
+you. And it will also allow you to keep a certain organisation in your files so you can easily work
+on different projects and each project will have its own script or set of scripts.
+[00:01:00.09] So how to do that? There are many ways to open a new project. For example, in
+the top right of your screen, you have a blue icon here that is indicating which project you're
+working on. We have no projects right now, so it is indicated as none, so let's create a new one.
+If you pull down the project's options, you will be given the option to create a new one from
+here, so let's click on a new project. .
+[00:01:29.15] You will be asked where you want to create it. Let's select, for example, a new
+directory, and we want to create it, let's select New Project. And let's name it, for example, I will
+name it Project Test, and where we want to put it is the exercise R folder. So let's continue using
+that one. And it is the same that we were using for the R sessions.
+[00:01:59.94] Then click on Create Project. So you will now see a new path appearing here,
+which says that we are working under this project that we just created. So by default, it will open
+the console again in its bigger format. You can just simply click on it to reduce it and you can
+also resize it. That's absolutely no problem to do that.
+[00:02:29.55] You can then create, also, new folders and files under this newly created project to
+contain scripts or data, for example, that will belong to this specific project. This is kind of a
+good practise that we generally use, because you will have dedicated scripts and dedicated data
+for each project, and that you can easily retrieve them.
+[00:02:52.68] So you can also load an existing script, as it is the case here with the previous
+script I created with some very basic commands that we saw in our previous R steps. The script
+is called "Test R commands," so I put it in the same exercise R. It is called "Test R commands."
+So imagine that this is an existing script where you put interesting commands that you want to
+retrieve. If I just simply click on it, it will open the different commands I put in the script in here
+directly, in your source quadrant.
+[00:03:30.74] A good practise is to leave notes for yourself in your scripts. So basically,
+everything that is written following the hashtag here will be a comment that you leave for
+yourself or, of course, for someone else that will be using your script. So this allows you to very
+easily use a script that you generated some time ago, because you will retrieve indications or
+explanations for each step easily. 
+[00:03:55.19] For example, you can see here that I indicated how to set my working directory for
+where I want to be here, and how to check that I am in the right place after that using that getwd
+command. I guess you remember these commands from the previous R steps.
+[00:04:12.39] So these comments allow me to remember what the command is doing. And you
+can also have comments written at the end of the line. It's perfectly fine. This will not be read as
+part of the script as long as it is written after a hashtag.
+[00:04:30.38] So if you want to run a command from a script, you can then place yourself either
+at the end of the command or you can just select that command and then click on Run. You just
+hit that Run button at the top-right of the source quadrant. And you can see that you will be
+redirected to where you want to be. OK?
+[00:04:56.81] And you can see that the path changed in here. So if I want to go again in Project
+Test, I can just basically type the same command, and slash, and I will select for Project Test. So
+if I do it, I can do it from here. I will select the Project Test, and then I can again run that
+command from here, and it will redirect me to that project list.
+[00:05:30.40] So before we move forward, one very general comment I would like to make
+about using RStudio is to tell you to please remember that when you end an RStudio session
+using the Q-command, as we saw it, you will generally be asked to save your workspace, as we
+saw it together. This can also be changed by accessing the settings and ask RStudio to register
+automatically your session in a certain directory.
+[00:06:02.31] Now, because we created a new project that we want to work from, when you
+open again an RStudio session, you can either open the app directly and then use the setwd to
+access that specific project, or you can simply go to your desktop and to the folder that you're
+working on, and then when you select this Project Test and click on it, this will open a new
+RStudio session with that new project that is called Project Test opened directly. So you can
+notice that here we have an environment that is empty, whereas in the first one, we had the Iris
+data set that was pre-loaded.
+[00:06:49.62] So again, we can resize our console and continue working on that. So if I type now
+getwd here as a command-- this is by default kind of a new script, so if I click on Run, it tells me
+that I am definitely in that Project Test. So I can also open by going into my exercise R. I can
+open again my commands, and everything is again accessible from that same options.
+[00:07:24.04] All right. Now, the second example we want to see together, and that, again, will
+show you how easy it is to use RStudio, is for installing packages. When you are in RStudio, you
+have different possibilities to instal packages. The first one is to write the command as we saw it
+in our steps again-- so basically writing instal packages in the console, and then simply typing
+the name of the package in quotes, as you can see it here.
+[00:07:52.27] For dplyr or ggplot2 packages that I put you here as examples, because these are
+two packages that we will be needing. So you remember the dplyr from the previous step that we
+used. And for the next steps, we will be using ggplot2 a lot. 
+[00:08:06.97] I could hit the Run button from here directly, but I want to show you what happens
+if you type a command in the console directly. In fact, it opens a pop-up window. So if I start
+typing instal packages, it opens that first pop-up window to give me all the possible commands.
+And once I click on the one I want, it will open another pop-up window to show me the usage of
+the command. And this can be very helpful sometimes if you forgot some usage of this
+command. And this is also possible with other commands you type in RStudio, of course. It is
+not something that is particular to instal packages.
+[00:08:46.84] So let me just imagine that I'm trying to instal dplyr. You need to remember that,
+by default, you have some packages that are pre-installed. And specifically, if you installed a
+newer version of RStudio, there are many that should be pre-installed, including here the dplyr
+package. They are organised in an alphabetical order. So in fact, you can easily retrieve any
+package that you're looking for.
+[00:09:14.45] So this shows me that I don't need to instal the package again. This is already done
+from RStudio. However, if I look for ggplot2, I'm not finding it here at all. And this is totally fine
+if you don't find it by default from the beginning, simply because it is not pre-installed as a preinstalled package in RStudio. So let's launch the installation for ggplot2.
+[00:09:52.50] So you will see a stop sign in here saying that you will not be able to use your
+console while it is installing. So you have to wait a few moments for it to be installed. So here,
+the connection was quite rapid. And I did try it before, so it is quite rapid. And then I removed it
+to show you this example. But it might take a couple of minutes, in fact, to instal it, with a lot of
+different codes that is written, as long as you go for installing the package. Don't worry. Don't
+touch anything. Leave it until it will give you the prompt again, that creator sign that is particular
+to R sessions.
+[00:10:36.48] There is another option to instal a package from RStudio. You can just go to the
+package, hit the Instal button, and then it will allow you to search on CRAN for your package of
+interest. If you remember, CRAN is a repository from which the packages can be accessed, and
+that we used previously in this course.
+[00:10:55.74] Then you will simply have to type or select the package you want and wait for the
+installation to proceed. So if I start typing ggplot2, it will show me different options. I will only
+have to select ggplot2 and then click on the Instal button. It will do exactly the same as it was
+done here. So I will click on Cancel, but you can Instal it in here.
+[00:11:17.85] All right. Now that we've installed the packages we want, before being able to use
+them, we will need to load them into our session, as we saw it in our steps. So you have, again,
+two ways of doing that in RStudio. One would be to do it directly from the console using the
+library function, as we saw it previously in this course. The second option you have is to open
+the available packages and simply click on the package name to select it.
+[00:11:46.21] Now, because I showed you how to use the console to Instal the package, let me
+show you how to easily load the package from the packages tab directly. So you basically just
+have to select your package of interest. You can see now ggplot2. That is installed. And then 
+simply click on it, and you can see that automatically it recognises that click as being your
+willingness to load that package. And it will write library for you to call that package. And it is
+as simple as that.
+[00:12:21.06] So one important thing to remember, however, is that you will have to Instal the
+package you want to use only once. You need to do it only once. When you will open new R
+sessions, ggplot2 will be pre-installed now. However, you will need to load the packages you
+want each time you open a new RStudio session.
+[00:12:44.14] So if we take again the example of dplyr, dplyr was pre-installed, but it was not
+loaded. So if I want to use dplyr, I just simply click on it, and it will load that package. So make
+sure to keep that in mind. Otherwise, you will not be able to use the functions that comes with a
+package.
+[00:13:04.20] However, you might have noticed that some packages that are previously preinstalled are also pre-loaded-- such as, for example, the data sets package-- you remember that
+was the one we used to select the Iris data set-- and also the graphics package that are pre-loaded,
+and that we use in this R session
+[00:13:25.89] So we can take some time now to get familiarised with this display in RStudio
+before moving forward in the upcoming steps. But you should have noticed that it is very easy
+and simple to use. And you have many things that you can do with either script-based options, as
+in R, or interactive options, by just clicking and selecting things as you would do it classically in
+your machine. Now you're ready to go with RStudio. 
+
 
 ## Data Visualisation Packages and Principles - a Focus on ggplot2
 
