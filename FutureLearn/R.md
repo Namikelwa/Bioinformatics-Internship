@@ -1853,3 +1853,47 @@ plot generated in question 3 with layers
 Please try to answer the questions yourself first and then compare the results with other learners. Finally, you can find solutions in the download area.
 
 
+## Data Visualisation in R/RStudio - Conclusion and Resources
+2 comments
+Data visualisation in R and RStudio makes it possible to easily use basic plotting functions, or apply more advanced functions through packages.
+
+As you must have noticed throughout this week, the undeniable added value of R/RStudio compared to the more classical resources such as Excel, is the ability to produce publication-ready graphics. For this, you can either use default functions and options, which already produce a highly controlled output quality, or you can also pre-define advanced options and use them in variables.
+
+Moreover, you can easily ensure reproducibility of your output, simply by writing your commands in a script. This would allow you to apply changes in your data or display with the same final output.
+
+Importantly, there are plenty of websites and online resources to easily take you through using packages, either using their official documentation, or personal contributions and forums to tackle certain aspects of the analysis.
+
+Although using packages such as ggplot2 might seem cumbersome to understand in the beginning, I’m pretty confident that you will quickly understand that the game is worth the candle!
+
+Resources for R/RStudio
+There are obviously tons of online resources to guide you through introductory or advanced R or RStudio usage.
+
+One I can suggest is http://www.sthda.com/english/wiki/ggplot2-essentials. This very famous website (STHDA: Statistical Tools for High-throughput Data Analysis) will give you a step by step explanation of how to use R and RStudio, taking you from very basic introductions of R principles to more advanced packages for data manipulation, statistical analysis, or data visualization with many detailed examples.
+
+Resources for ggplot2
+As I believe you understood at this point, there are still many functions and options to explore in ggplot2.
+
+For a list of functions available in ggplot2, there are again many resources on the web. It is important to browse these resources by yourself, because each one of you will have specific display requirements and we obviously cannot cover them all.
+
+However, now that I showed you some basic usage, and in order to help you start using ggplot2 with good references, my personal preferences are for the following resources:
+
+https://ggplot2-book.org/ This is the on-line version of the book “ggplot2: elegant graphics for data analysis” published (Springer publishing). This a very detailed resource on explanations of each layer with helpful examples
+
+https://ggplot2.tidyverse.org/reference/
+This website presents ggplot2 functions classified by type of layer (aesthetics, geoms,…) and in which you can click on each function name to be automatically redirected to its usage
+
+https://www.rdocumentation.org/packages/ggplot2/versions/3.3.3 The first page of this documentation page presents a “cheatsheet” that is a printable document summarizing functions in ggplot2. At the bottom of the page you will also find a list of clickable ggplot2 functions to access their usage including examples. Many links to start working with ggplot2 are also given here
+
+## Summary of Week 3
+2 comments
+Seeing how to handle and analyse your data using the command-line in Week 1, and how to write and run bash scripts to automate that handling during Week 2, in Week 3 you saw how you can analyse and visually represent your data using R and RStudio.
+
+We first reviewed together the key concepts and basics of using the R language. You had an opportunity to learn how to manipulate lists, vectors or dataframes, and how to read and interrogate data from files to create simple plots under R. We then saw how RStudio can simplify these processes, and you learned how to work under RStudio to easily create simple or more complex plots using available packages specifically designed for that purpose.
+
+Please leave your comments in the comments section below - in particular, did you learn anything that will be applicable to your own practice or study?
+
+We hope you enjoyed this course!
+Please attempt the End of the Course Test in the next step. Getting 70% or more on the test and reviewing (marking as complete) at least 90% of steps in this course, make you eligible for the Certificate of Achievement which you can download at the end of the course.
+
+Good luck with your next step!
+
