@@ -365,3 +365,243 @@ a vector n containing two copies of x separated by a 0
 Question 2. Is the content of m equal to the content of n?
 
 Question 3. Note that you should also obtain a warning message because the 2 vectors are not of the same length. How can you check the length of both vectors?
+
+
+
+How to Create and Manipulate Lists and Data frames in R
+7 comments
+Lists and Data frames in R
+
+A List is an “object” in R that consist of a collection of other objects known as components.
+
+Lists can have components of the same type or mode, or components of different types or modes. They can hence combine different components (numeric, logical…) in a single object.
+
+A Data frame is simply a List of a specified class called “data.frame”, but the components of the list must be vectors (numeric, character, logical), factors, matrices (numeric), lists, or even other data frames. Other restrictions include the fact that the contents of a data frame must have the same length (vectors), or be of the same row size (matrices). A data frame can be considered as a simple matrix containing rows and columns, having potentially different modes and attributes.
+
+We encourage you to find more information on Lists and Data frames in the following link: https://cran.r-project.org/doc/manuals/r-release/R-intro.html Let’s see together in this step how Lists and Data frames can be created and manipulated.
+
+How to create and manipulate Lists
+Step 1. We recommend you to work in the same working sub-directory that you created previously, using one of the following options
+
+Before launching R
+
+$ cd exerciseR
+$ pwd
+/Users/imac/Desktop/exerciseR
+$ R
+After launching R
+
+> setwd("/Users/imac/Desktop/exerciseR")
+> getwd()
+[1] "/Users/imac/Desktop/exerciseR"
+Step 2. Let’s create a simple List called L. We need to assign elements to this List.
+
+> L<-list(dairy="milk",type="almond",form="liquid",contain.liter=c(0.5,1,2))
+This will create a list called L with 4 elements.
+
+
+> L<-list(dairy="milk",type="almond",form="liquid",contain.liter=c(0.5,1,2))
+> 
+> L
+$dairy
+[1] "milk"
+ 
+$type
+[1] "almond"
+ 
+$form
+[1] "liquid"
+ 
+$contain.liter
+[1] 0.5 1.0 2.0
+Step 3. The function “length()” can allow you to easily retrieve the number of top level components of this List.
+
+> length(L)
+[1] 4
+Step 4. Please note that components of a list are always numbered by default. If L is the list with 4 components we just created, then L[[1]] will be its first component, etc. We can also refer to the first entry of Component 4 independently, as L[[4]] is a vector itself and L[[4]][[1]] will refer to its first entry.
+
+> L[[1]]
+[1] "milk"
+> L[[2]]
+[1] "almond"
+> L[[3]]
+[1] "liquid"
+> L[[4]]
+[1] 0.5 1.0 2.0
+> 
+> L[[4]][[1]]
+[1] 0.5
+Step 5. More conveniently, we could also refer to the Component of a List by its name, instead of using its position number between double brackets. When using this option, you will need to provide the Component name by using the “$” symbol. As an example, you can use L$dairy or L[[1]] to refer to the first component of a List equally
+
+> L$dairy
+[1] "milk"
+> L[[1]]
+[1] "milk"
+Step 6. Different Lists can be combined using the concatenation function that we used before, c(). This will result in an object of mode List also, because we gave this function arguments of the mode List.
+
+> List.A <- list(dairy="milk", type="almond")
+> List.B <- list(dairy="yogurt", type="frozen")
+> List.AB <- c(List.A, List.B)
+> List.AB
+$dairy
+[1] "milk"
+ 
+$type
+[1] "almond"
+ 
+$dairy
+[1] "yogurt"
+ 
+$type
+[1] "frozen"
+Note. Please note that there are many more options to use the Lists. We only covered those that might be relevant to understand for the rest of the course. We encourage you to find more information on lists in the link given to you in the introductory part of this Step.
+
+How to create and manipulate Data frames
+Step 1. Now that we know how Variables, Vectors, and Lists can be created and manipulated, let’s use this knowledge to create sequentially a data frame called df.
+
+> Name <- c("Lilly", "James", "Harry")
+> Age <- c(30,  31, 11)
+> Height <- c(168, 179, 139)
+> Weight <- c(57, 69, 32)
+> df <- data.frame (row.names = Name, Age, Height, Weight)
+Step 2. Once created, the data frame can be called directly by simply typing its name.
+
+> Name <- c("Lilly", "James", "Harry")
+> Age <- c(30,  31, 11)
+> Height <- c(168, 179, 139)
+> Weight <- c(57, 69, 32)
+> df <- data.frame (row.names = Name, Age, Height, Weight)
+> df
+      Age Height Weight
+Lilly  30    168     57
+James  31    179     69
+Harry  11    139     32
+Step 3. Additional information can be added to an existing data frame. We can create a new data frame containing the same names, to be able to make the correspondence (used as a primary key) and then combine both data frames using cbind(), a function used to combine objects (vectors, data frames,…) by columns.
+
+> Name <- c("Lilly", "James", "Harry")
+> Sex <- c("F", "M", "M")
+> df.add <- data.frame(row.names = Name, Sex)
+> df.add
+      Sex
+Lilly   F
+James   M
+Harry   M
+> df.all <- cbind(df, df.add)
+> df.all
+      Age Height Weight Sex
+Lilly  30    168     57   F
+James  31    179     69   M
+Harry  11    139     32   M
+Step 4. The information added can be in the form of Factors that can be used to represent categorical data, and can help you using plotting functions later on. Let’s create again a new data frame (df.add.fact) with the information in the Sex vector added as a Factor, and combine both in a new data frame (df.all.fact)
+
+> Name <- c("Lilly", "James", "Harry")
+> Sex <- as.factor(c("F", "M", "M"))
+> df.add.fact <- data.frame(row.names = Name, Sex)
+> df.all.fact <- cbind(df, df.add.fact)
+> df.all.fact
+      Age Height Weight Sex
+Lilly  30    168     57   F
+James  31    179     69   M
+Harry  11    139     32   M
+Note 1. Note that we coerced the content of “Sex” to be a Factor by as.factor(). Factors are categorical data that can only take certain values such as “M” and “F”, which is the case of the field “Sex”. These distinct values are predefined and will be called Levels. This can be checked using the functions class() and levels()
+
+> class(Sex)
+[1] "factor"
+> levels(Sex)
+[1] "F" "M"
+Note 2. At this stage, you will notice no difference. But using levels() you will be able to see how factors can now be recognised as such.
+
+> levels(df.all$Sex) <- c("M", "F")
+> df.all
+      Age Height Weight Sex
+Lilly  30    168     57   M
+James  31    179     69   F
+Harry  11    139     32   F
+> 
+> levels(df.all.fact$Sex) <- c("M", "F")
+> df.all.fact
+      Age Height Weight Sex
+Lilly  30    168     57   M
+James  31    179     69   F
+Harry  11    139     32   F
+To query the type of levels we can use “levels()” and to query the number of levels, you can use “nlevels()”
+
+> levels(Sex)
+[1] "F" "M"
+> nlevels(Sex)
+[1] 2
+Step 5. Let’s see a set of useful functions to explore and manipulate a data frame
+
+How many rows and columns are in the data frame df.all.fact ? you can use dim() to set or get the dimension of the data frame (rows, columns), or more specifically nrow() for the number of columns and ncol() for the number of columns.
+> dim(df.all.fact)
+[1] 3 4
+> nrow(df.all.fact)
+[1] 3
+> ncol(df.all.fact)
+[1] 4
+2. What is the class of data in each column? Use sapply() which will output the result of a certain function to an object (here will output the classes in the data frame) or str() to display the structure of an object in R or all basic structures of a data frame (one line for each)
+
+> sapply(df.all.fact, class)
+      Age    Height    Weight       Sex 
+"numeric" "numeric" "numeric"  "factor" 
+> 
+> str(df.all.fact)
+'data.frame':	3 obs. of  4 variables:
+ $ Age   : num  30 31 11
+ $ Height: num  168 179 139
+ $ Weight: num  57 69 32
+ $ Sex   : Factor w/ 2 levels "M","F": 1 2 2
+3. It is possible to subset or filter a data frame, as simply as we did it for Lists. For instance, let’s see here how to select one column or one row.
+
+To select a column: [1] is column 1, [,1] is column 1 displayed as a vector
+
+To select a row: [1,] is row 1
+
+> df.all.fact[1]
+      Age
+Lilly  30
+James  31
+Harry  11
+> df.all.fact[,1]
+[1] 30 31 11
+> 
+> df.all.fact[1,]
+      Age Height Weight Sex
+Lilly  30    168     57   M
+4. This is how to select a group of elements.
+
+To select the element in column 1 and row 1: [1,1]
+
+To select elements 1 to 3 in column 3
+
+> df.all.fact[1,1]
+[1] 30
+> 
+> df.all.fact[1:3,3]
+[1] 57 69 32
+5. To re-order data in a data frame, there are different options. We can use “order()”. Let’s try to re-order here based on the Height column
+
+> df.all.fact
+      Age Height Weight Sex
+Lilly  30    168     57   M
+James  31    179     69   F
+Harry  11    139     32   F
+> df.all.fact[order(df.all.fact$Height),]
+      Age Height Weight Sex
+Harry  11    139     32   F
+Lilly  30    168     57   M
+James  31    179     69   F
+6. To filter the data, functions such as “unique()” and “sort()” can be used. This should remind you of the sort and uniq functions that can be used in Unix.
+
+To obtain unique values of the column Age: unique(df.all.fact$Age)
+
+To obtain sorted unique values of the column age: sort(unique(df.all.fact$Age))
+
+> unique(df.all.fact$Age)
+[1] 30 31 11
+> 
+> sort(unique(df.all.fact$Age))
+[1] 11 30 31
+Note. There are different types of data that can be considered, and treated differently according to their nature.
+
+table explaining different types of data, qualitative and quantitative
