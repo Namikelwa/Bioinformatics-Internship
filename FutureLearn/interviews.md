@@ -49,3 +49,97 @@ No, in a way– in a, way, actually you were saying, are there any advantages or
 
 You get an answer quickly, but also, people realise, oh, they’re doing that, OK, and may chip in advice which will say, well, OK, I’m glad you’re doing that, or you’ve thought about it, but maybe you want to try this, right? So in that sense, the democratisation through these channels has really been accelerated by COVID, which is a good thing. yeah. And I think that brings us to a good place to wrap this up. Thank you so much for joining us today, Vivek, and we really hope that if you have any comments or questions, you’ll leave them in the comments section below. And thank you for listening.
 
+## R
+blob:https://www.futurelearn.com/17e2b77e-87cb-40f2-ad78-66d497cf207d
+
+[00:00:08.59] Hi. My name is Fatma Guerfali, and I am a researcher at Institut Pasteur de Tunis
+in Tunisia. And I'm also a trainer, in Tunisia and abroad, for NGS data analysis and visualisation.
+[00:00:23.23] I would like to discuss today the importance of data visualisation, especially in our
+modern societies where we know that about 90% of the information that is transmitted to the
+brain is visual. And today in fact, visual representations are so important that many studies
+showed that, on average, a person would remember 80% of what she sees but only 20% of what
+she reads. So we have the immense privilege to discuss today this particular topic on the
+importance of data visualisation with Andy Kirk.
+[00:01:03.75] Andy, you are a freelance data visualisation specialist. You're based in Yorkshire
+UK. You work as a data visualisation consultant, a training provider, a teacher, an author,
+speaker, and researcher. But most importantly, you're the editor of the award-winning amazing
+website that is called visualizingdata.com. So in other words, this means you have an amazing
+expertise in data visualisation. So Andy, can you tell us a bit more about yourself? And most of
+all when did you sense that it was important to dedicate an entire career to explain and teach the
+importance and power of data visualisation?
+[00:01:50.59] Thank you, Fatma. Yes. So when I was a kid at school, I loved art and maths. And
+I was always looking for a career pathway that would take me into a realm or a job or a vocation
+that would bring these two worlds together. Now initially, I thought that maybe architecture was
+the route to do that. However, that didn't kind of work out. My physics was a little bit too weak.
+When I finished University, I'd worked on a number of modules around statistics and data
+analysis. And so I took my career down that direction-- analysis, performance analysis, business
+analysis.
+[00:02:29.89] But it wasn't until February 2007 when I found this subject on the web-- data
+visualisation. I didn't have any idea it was a thing and I found it. But when I found it, I realised
+that the charts and the presentations that I was producing at work were insufficient, were not
+good enough. But also I just had this immediate passion a lot because I recognised there was a
+subject, there was discourse, there was evidence about good and bad practise.
+[00:03:01.78] And so at the time, I was working at a University, and I had the opportunity to do a
+master's degree through self-directed research. So long story short, I did a master's degree around
+data visualisation, completely reinforced my passion for it. And then I thought, well, maybe I
+should think about doing this for a career. So I went freelance, part time initially. And thankfully
+over the last decade, the field has grown. And I've been very fortunate to be in position to take
+advantage of that and grow with it.
+[00:03:36.96] That's very nice, Andy. Thanks for sharing that with us. So I now understand
+better what your website is presenting so much examples and resources on data visualisation.
+And your website rapidly grew to become a really popular reference for followers in the field. So 
+based on your experience in that particular field, what would be the basic principles for an
+efficient data visualisation for you? And how can we envision data visualisation and use it as one
+of the most compelling, persuasive, and potent practises to present even complex, large-scale
+data today?
+[00:04:17.91] That's right. And I think it's important that you mention the word complex there
+because the universal goal of effective visualisation is to clarify, not necessarily simplify. There
+are many topics, especially within science, where the fundamental topic is complicated. It is
+sophisticated. It should require a degree of time, a certain amount of effort, and a certain amount
+of motivation on behalf of the reader to find and discover insights.
+[00:04:51.55] But my main three principles for visualisation-- it should be trustworthy, so the
+audience should have a sense that what they are consuming in terms of information,
+understanding, and knowledge is reliable. It is accurate. It is based on good judgement.
+[00:05:09.98] The second principle is it should be accessible. And this does unpack the notion of
+clarifying because accessible design is removing unnecessary obstacles to understanding. Now
+again, that does not mean it's always about making things quick, simple, and easy. There is a
+time and place for you to judge that that's important. But accessible design is about removing
+unnecessary confusion, things that people don't understand how to read. What do those colours
+represent? What do I do to click on that? How do I use this thing?
+[00:05:43.81] The third principle in some respects is a bonus. It's about elegance. Can we make
+our work as aesthetically appealing and as attractive and as seductive as possible? Now, one of
+the interesting things about elegance as a concept in design is, you notice it when it's missing
+more than when it's present. We take elegance for granted. So elegance is about the harmony of
+the colour choices, about the layout, about the beauty of the typeface choices, things that will
+cause someone to stop and to look at your work but will also help to sustain that engagement
+throughout the process of them reading and understanding the work. So trustworthiness,
+accessible, and elegance are the three things I think are most important.
+[00:06:32.31] Oh, that's really, really important. And I think it elegantly summarises what we
+should think of why doing good data visualisation. And I feel that-- when you're speaking, I feel
+that there is a scientific perspective and a non-scientific one to make good data visualisation. So
+from both these perspectives, do you think that when we want to present efficiently a particular
+information we need to first understand how the human brain captures, understands, and
+integrates efficiently a visual message?
+[00:07:13.38] Absolutely. And I think the key word there is "human." And again, there are two
+branches that we need to think about here because the human cognition process, for which there
+is scientific evidence about things that work well and things that don't work well or at least
+things that exploit the capability of the eye and the brain and the visual processing system. And
+there are lots of studies through the ancestry of the field that tell us the things that we should do
+and the things that we shouldn't do. 
+[00:07:44.55] But the second branch that comes off the notion of "human" is people. People are
+always the recipients of this. And people are inherently complex and flawed. We have blind
+spots. We have prejudices. We have pressures. We have lack of confidence. We've already made
+our mind up about something.
+[00:08:04.86] So one of the absolute key fundamental bits of advice that any visualisation person
+would always tell somebody else is, think about the audience. Think about the receiver. And
+when we talk about that we're asking, what are the characteristics of these people? What do they
+need to know? What do they currently not know? What are their motivations for what they will
+do with this?
+[00:08:28.83] Is it about direct decision making or actions? Or is it just an extra grain of
+knowledge about something? Are they in a situation that's under pressure? It's noisy, it's busy.
+They're travelling. They can't look at something in detail on the phones.
+[00:08:43.20] So you're always trying to put yourself into the mindset of the recipient and think
+about their capabilities and how they will encounter your work to understand some of these
+decisions that you need to make. So it is absolutely a blend of the science but also the art. And by
+art, I don't mean necessarily just creativity, but the art of judging these imperfections about
+human responses and the situations that they go through. 
