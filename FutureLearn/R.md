@@ -368,6 +368,26 @@ Question 3. Note that you should also obtain a warning message because the 2 vec
 
 
 
+SOLUTION 1.
+> x <- c(3, 10, 30)
+> m <- rep(x, times=2)
+> m
+[1] 3 10 30 3 10 30
+> n <- c(x,0,x)
+> n
+[1] 3 10 30 0 3 10 30
+SOLUTION 2.
+> m==n
+[1] TRUE TRUE TRUE FALSE FALSE FALSE FALSE
+SOLUTION 3.
+> length(m)
+[1] 6
+> length(n)
+[1] 7
+
+
+
+
 How to Create and Manipulate Lists and Data frames in R
 7 comments
 Lists and Data frames in R
@@ -605,3 +625,908 @@ To obtain sorted unique values of the column age: sort(unique(df.all.fact$Age))
 Note. There are different types of data that can be considered, and treated differently according to their nature.
 
 table explaining different types of data, qualitative and quantitative
+
+
+Working on Data Frames - Exercises and Discussion
+21 comments
+Working on Data frames: here are some questions for you to practice
+
+Try to answer the following questions, then compare your answers with your fellow learners in the comment area.
+
+Question 1. Create a Data frame
+Create a Data frame called df_fruits from the following Vectors:
+
+A Vector called Fruits composed of Apple, Banana, Orange, Mango
+A Vector called Price composed of 4, 3, 2, 8
+A Vector called Nature composed of Local, Exotic, Local, Exotic as factors
+Question 2. Check your Data frame
+How would you verify that the newly Data frame called df_fruits
+
+Is properly created
+What are the levels of the factors in the column called Nature
+How many different of these levels were created
+Question 3. Manipulate your Data frame
+How would you verify the number of rows and columns of the new Data frame called df_fruits?
+What class of data is in each column?
+How would you select all elements of the column called Price?
+
+
+Solution 1.
+> Fruits <- c("Apple", "Banana", "Orange", "Mango")
+> Price <- c(4, 3, 2, 8)
+> Nature<- as.factor(c("Local", "Exotic", "Local", "Exotic"))
+> df_fruits <- data.frame(row.names = Fruits, Price, Nature)
+Solution 2.
+> df_fruits
+ Price Nature
+Apple 4 Local
+Banana 3 Exotic
+Orange 2 Local
+Mango 8 Exotic
+>
+> levels(Nature)
+[1] "Exotic" "Local"
+> nlevels(Nature)
+[1] 2
+Solution 3.
+1. Number of rows and columns
+> df_fruits
+ Price Nature
+Apple 4 Local
+Banana 3 Exotic
+Orange 2 Local
+Mango 8 Exotic
+> dim(df_fruits)
+[1] 4 2
+> nrow(df_fruits)
+[1] 4
+> ncol(df_fruits)
+[1] 2
+2. Classes of data
+> sapply(df_fruits, class)
+ Price Nature
+"numeric" "factor"
+> str(df_fruits)
+'data.frame': 4 obs. of 2 variables:
+$ Price : num 4 3 2 8
+$ Nature: Factor w/ 2 levels "Exotic","Local": 2 1 2 1
+3. There are 2 Possible solutions depending on the desired output
+> df_fruits[1]
+ Price
+Apple 4
+Banana 3
+Orange 2
+Mango 8
+> df_fruits[1:4,1]
+[1] 4 3 2 8
+
+
+
+Reading Data from Files in R
+31 comments
+Reading data from files
+
+Introduction
+Now that we have learned how to create, query and manipulate simple data frames, let’s see how the basic functions we covered can be useful with more complex datasets.
+
+Indeed, you will often be willing to exploit the usefulness of built-in functions in R to manipulate large data sets. Although these data sets are organized as data frames, with information organized in rows and columns, it is obviously not easy to create it from scratch. Instead, there are specific built-in functions in R that allows us to import existing data contained in a file.
+
+Let’s see together in this step how to read data from an existing file. We will also see how to simply query with basic functions in R this exiting data set.
+
+We will use the iris dataset, another example of tab-delimited file such as the diamonds dataset that you have used before in this course. It contains information about 3 plant species (setosa, virginica, versicolor) and related measures about 4 features (Sepal.Length, Sepal.Width, Petal.Length, Petal.Width) of these plants.
+
+Note that this information is organized in a particular form:
+
+Each column is named to indicate the features and species to consider
+Each row contains a row label and information corresponding to features and species
+If you want in the future to use another file you generated, make sure that no missing information is left empty. Instead, indicate it as NA (Not Applicable).
+
+We encourage you to find more information on reading, querying and manipulating data frames from files in the following links: https://cran.r-project.org/doc/manuals/r-release/R-intro.html and https://rpubs.com/moeransm/intro-iris
+
+How to import and read data from files in R
+Step 1. We recommend you to work in the same working sub-directory that you created previously, using one of the following options
+
+Before launching R
+
+$ cd exerciseR
+$ pwd
+/Users/imac/Desktop/exerciseR
+$ R
+After launching R
+
+> setwd("/Users/imac/Desktop/exerciseR")
+> getwd()
+[1] "/Users/imac/Desktop/exerciseR"
+Step 2. There are 2 ways to use existing files and access the data sets they contain in R:
+
+Option 1. If the file exists in your computer, use the “read.table()” function to read the file / data frame. To view part of its content, you can use many functions as the “head()” or “tail()” functions as in Unix
+
+> Iris <- read.table("iris.txt")
+> head(Iris)
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa
+Option 2. R has also pre-built datasets that can be used for exercise purposes. We will use the “iris“ data set. This data set is available under the datasets package. To load a package under R, use the “library()” function. Once you loaded the datasets package, call the data set you want using the “data()” function
+
+> library(datasets)
+> data(iris)
+> head(iris)
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa
+To review all the pre-build data sets available in R (type q to quit)
+
+> data()
+Note 1. Note that we called the variable in which we imported the file “Iris”, whereas the data set called from R is named “iris”. You are free to choose the name of the variables you use in R, but if you call data sets from the existing datasets package you must use its proper nomenclature
+
+Note 2. Note that once your data set of interest is loaded, all the commands and functions that we will use will be applicable to both “Iris” and “iris” equally. As an example, we will use “iris” in this Step.
+
+How to make simple queries and data manipulation in R
+Step 1. To view a summary statistics of the whole data set, use the “summary()” function. You can also view summary statistics of one of the variables using the “$” option we saw previously
+
+> summary(iris)
+  Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   
+ Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  
+ 1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300  
+ Median :5.800   Median :3.000   Median :4.350   Median :1.300  
+ Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199  
+ 3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800  
+ Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500  
+       Species  
+ setosa    :50  
+ versicolor:50  
+ virginica :50
+> 
+> summary(iris$Species)
+    setosa versicolor  virginica 
+        50         50         50 
+> 
+> summary(iris$Petal.Length)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  1.000   1.600   4.350   3.758   5.100   6.900 
+Step 2. Let’s now query the names of columns using the “names()” function, and the data set content in terms of number of columns and rows, structure, etc…
+
+> names(iris)
+[1] "Sepal.Length" "Sepal.Width"  "Petal.Length" "Petal.Width"  "Species"     
+>
+> names(iris)
+[1] "Sepal.Length" "Sepal.Width"  "Petal.Length" "Petal.Width"  "Species"     
+> dim(iris)
+[1] 150   5
+> ncol(iris)
+[1] 5
+> nrow(iris)
+[1] 150
+>
+> sapply(iris, class)
+Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
+   "numeric"    "numeric"    "numeric"    "numeric"     "factor" 
+> str(iris)
+'data.frame':	150 obs. of  5 variables:
+ $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+ $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+ $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+ $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+ $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 1 1 1 1 1 1 1 1 1 ...
+> 
+Step 3. To query or manipulate this data set, it is possible to use basic operators in R
+
+> setosa1 <- iris[iris$Species == "setosa",]
+> head(setosa1)
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa
+> nrow(setosa1)
+[1] 50
+Alternative option
+
+> setosa2 <- iris[iris$Species %in% "setosa",]
+> nrow(setosa2)
+[1] 50
+To select data related to the setosa species in which Sepal.Length > 5
+
+> setosa3<- setosa2<-iris[iris$Species %in% "setosa" & iris$Sepal.Length>5,]
+> nrow(setosa3)
+[1] 22
+Step 4. To avoid using operators, conditional subsetting is also possible with base functions in R that can ease the process and using the same principles. An example is the “subset()” function
+
+To select only data related to the setosa species
+
+> setosa.sub1 <- subset(iris, Species == "setosa")
+> head(setosa.sub1)
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa
+> nrow(setosa.sub1)
+[1] 50
+To select again data related to the setosa species in which Sepal.Length > 5
+
+> setosa.sub2 <- subset(iris, Species == "setosa" & Sepal.Length > 5)
+> nrow(setosa.sub2)
+[1] 22
+Exercise
+Question 1. How would you check if the variables setosa1 and setosa.sub1 are equivalent?
+
+Question 2. What is the structure of setosa.sub2 ?
+
+SOLUTION 1.
+> setosa.test <- setosa1 == setosa.sub1
+> head(setosa.test)
+ Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1 TRUE TRUE TRUE TRUE TRUE
+2 TRUE TRUE TRUE TRUE TRUE
+3 TRUE TRUE TRUE TRUE TRUE
+4 TRUE TRUE TRUE TRUE TRUE
+5 TRUE TRUE TRUE TRUE TRUE
+6 TRUE TRUE TRUE TRUE TRUE
+SOLUTION 2.
+> str(setosa.sub2)
+'data.frame': 22 obs. of 5 variables:
+$ Sepal.Length: num 5.1 5.4 5.4 5.8 5.7 5.4 5.1 5.7 5.1 5.4 ...
+$ Sepal.Width : num 3.5 3.9 3.7 4 4.4 3.9 3.5 3.8 3.8 3.4 ...
+$ Petal.Length: num 1.4 1.7 1.5 1.2 1.5 1.3 1.4 1.7 1.5 1.7 ...
+$ Petal.Width : num 0.2 0.4 0.2 0.2 0.4 0.4 0.3 0.3 0.3 0.2 ...
+$ Species : Factor w/ 3 levels "setosa","versicolor",..: 1 1 1 1 1 1 1 1 1 1 .
+
+
+Querying and Manipulating Data from Files Using Dedicated Packages in R
+23 comments
+Querying and manipulating data from existing files
+Introduction
+
+Querying and manipulating data from files might require you to use advanced options. In R, packages have been developed for specific purposes such as data manipulation, data analysis, or plotting. Packages need first to be installed and loaded into R. Each package comes with a set of functions.
+
+Let’s see together in this step how to query and manipulate data from an existing file using a dedicated package called dplyr. We will see how some of its functions can be helpful for more complex queries and manipulation of your data than basic R functions.
+
+We will keep using the iris dataset, that you have used already.
+
+We encourage you to find more information on reading, querying and manipulating data frames from files in the following links: https://cran.r-project.org/doc/manuals/r-release/R-intro.html and https://rpubs.com/moeransm/intro-iris
+
+Import and read data from files in R
+Step 1. We recommend you to work in the same working sub-directory that you created previously, using one of the following options
+
+Before launching R
+
+$ cd exerciseR
+$ pwd
+/Users/imac/Desktop/exerciseR
+$ R
+After launching R
+
+> setwd("/Users/imac/Desktop/exerciseR")
+> getwd()
+[1] "/Users/imac/Desktop/exerciseR"
+Step 2. You should be able now to call again the dataset we want you to work on, the iris data set.
+
+To read the file from your computer
+
+> Iris <- read.table("iris.txt")
+> head(Iris)
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa
+To read the file from the available data sets in R
+
+> library(datasets)
+> data(iris)
+> head(iris)
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa
+Using the dplyr package
+Step 1. To use the dplyr package on the iris data set, we will need to call the package.
+
+Because dplyr is not genuinely part of R, we will need to install it first using the “install.packages()” function
+
+> install.packages("dplyr")
+--- Please select a CRAN mirror for use in this session ---
+Secure CRAN mirrors 
+ 
+ 1: 0-Cloud [https]
+ 2: Australia (Canberra) [https]
+ 3: Australia (Melbourne 1) [https]
+……
+76: USA (TX 1) [https]
+77: Uruguay [https]
+78: (other mirrors)
+Once you select your CRAN mirror of interest (the closest to your location) as we did before, the installation will proceed. Once terminated, you will be able to load the package using the “library()” function
+
+> library(dplyr)
+Note 1. A package comes with specific functions that would not otherwise be recognized in R. Examples of basic verbs for data manipulation available with the dplyr package are “filter()”, “select()”, “mutate()”, “arrange()”, “rename()”, “relocate()”, “slice()”, “summarise()”. We will see how to use the first 3 verbs, but if you want information on other dplyr functions, or more advanced options, please refer to https://dplyr.tidyverse.org/articles/dplyr.html
+
+Note 2. For all dplyr functions, as it will be the case for other packages in R, the first argument needs to be the data frame, also called tibble.
+
+Step 2. Let’s see how you can now use the “filter()” function to filter specific data from this file, as we used the “subset()” function in base R. Let’s again filter only the data related to the Species “setosa”
+
+Filtering the data after installing and loading the package
+
+> setosa.filt <- filter(iris, Species == "setosa")
+> head(setosa.filt)
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa
+To check that the new variable setosa.filter generated contains only data related to setosa species, as it was also the case for the variable setosa generated with the “subset()” function in base R (previous Step9)
+
+> nrow(setosa)
+[1] 50
+> nrow(setosa.filt)
+[1] 50
+To filter on multiple conditions: here based on setosa species having a Petal.Length smaller than 2, then > 2
+
+> setosa.filt.pl2 <- filter(iris, Species == "setosa", Petal.Length < 2)
+> head(setosa.filt.pl2)
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa
+> nrow(setosa.filt.pl2)
+[1] 50
+> setosa.filt.pl2 <- filter(iris, Species == "setosa", Petal.Length > 2)
+> nrow(setosa.filt.pl2)
+[1] 0
+Note. Note that if the 2 variables are of the same name (data filtered based on > 2 or <2), the latter will replace the previous
+
+Step 3. To select specific columns, the “select()” function can be very helpful To select specified columns that can be distant
+
+> Iris.select <- select(iris, Sepal.Length, Petal.Length) 
+> head(Iris.select)
+  Sepal.Length Petal.Length
+1          5.1          1.4
+2          4.9          1.4
+3          4.7          1.3
+4          4.6          1.5
+5          5.0          1.4
+6          5.4          1.7
+To select a group of consecutive columns
+
+> Iris.select.2 <- select(iris, Sepal.Length:Petal.Width) 
+> head(Iris.select.2)
+  Sepal.Length Sepal.Width Petal.Length Petal.Width
+1          5.1         3.5          1.4         0.2
+2          4.9         3.0          1.4         0.2
+3          4.7         3.2          1.3         0.2
+4          4.6         3.1          1.5         0.2
+5          5.0         3.6          1.4         0.2
+6          5.4         3.9          1.7         0.4
+Step 4. Now imagine you would like to add new columns to an existing data frame. The “mutate()” function can be used in the following example to add a new column called Test, with the information of whether Sepal.Length is greater than twice the size of Petal.Length (TRUE) or not (FALSE)
+
+> test.col <- mutate(iris, Test = Sepal.Length > 2 * Petal.Length)
+> head(test.col)
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species Test
+1          5.1         3.5          1.4         0.2  setosa TRUE
+2          4.9         3.0          1.4         0.2  setosa TRUE
+3          4.7         3.2          1.3         0.2  setosa TRUE
+4          4.6         3.1          1.5         0.2  setosa TRUE
+5          5.0         3.6          1.4         0.2  setosa TRUE
+6          5.4         3.9          1.7         0.4  setosa TRUE
+> tail(test.col)
+    Sepal.Length Sepal.Width Petal.Length Petal.Width   Species  Test
+145          6.7         3.3          5.7         2.5 virginica FALSE
+146          6.7         3.0          5.2         2.3 virginica FALSE
+147          6.3         2.5          5.0         1.9 virginica FALSE
+148          6.5         3.0          5.2         2.0 virginica FALSE
+149          6.2         3.4          5.4         2.3 virginica FALSE
+150          5.9         3.0          5.1         1.8 virginica FALSE
+Exercise
+Question 1. Using this last example, how would you count the number of TRUE items in the newly created Test column?
+
+
+SOLUTION 1.
+> test.col.num <- filter(test.col, test == "TRUE")
+> nrow(test.col.num)
+[1] 50
+You can double check the total number of rows in test.col and the complementary
+number of FALSE items
+> test.col.num2 <- filter(test.col, test == "FALSE")
+> nrow(test.col.num2)
+[1] 100
+> nrow(test.col)
+[1] 150
+
+
+Making Simple Plots in R
+6 comments
+Introduction
+
+The majority of us have long been in the habit of using Excel to make plots. This is still fine for some small data sets, but for large data sets, it is really complicated to load data in Excel and manipulate it. Moreover, Excel is prone to errors when manipulating the data when it comes to filtering, arranging, or querying complex data. This is without even mentioning the complexity of generating and arranging plots in a publishable way.
+
+In a world where information is mainly visual, whether science, journalism or even social media publications, R can rapidly and efficiently meet our needs. We will see here how very basic functions in R can make your life easier !
+
+We encourage you to find more information on plotting data frames from files in the following links: https://cran.r-project.org/doc/manuals/r-release/R-intro.html and/or https://rpubs.com/moeransm/intro-iris and/or https://hbctraining.github.io/Intro-to-R/lessons/basic_plots_in_r.html
+
+Import and read data from files in R
+Step 1. We recommend that you work in the same working sub-directory that you created previously, using one of the following options
+
+Before launching R
+
+$ cd exerciseR
+$ pwd
+/Users/imac/Desktop/exerciseR
+$ R
+After launching R
+
+> setwd("/Users/imac/Desktop/exerciseR")
+> getwd()
+[1] "/Users/imac/Desktop/exerciseR"
+Step 2. Import or load the iris dataset we want you to work on
+
+From your computer
+
+> Iris <- read.table("iris.txt")
+From the available data sets in R
+
+> library(datasets)
+> data(iris)
+Basics of plotting graphics in R
+Introduction
+
+The principle of plotting using R commands is to provide generally 2 main information types: (1) the data we want to use, and (2) preferences or options for display. This information should be provided as individual elements, that will be interpreted in R as arguments. They are interpreted as layers of information.
+
+Simple basic graphics in R
+
+Basic graph types found in typical spreadsheet software also exist in R, such as histograms, barplots, scatterplots or boxplots. These can be generated using commands or functions such as “hist()”, “barplot()”, “plot()”, “boxplot()” respectively. Many others exist, all as part of the ‘base’ graphics package of R, but we will only cover examples of graphs generated with “hist()” and “plot()”. For a full list of variants, use
+
+> library(help = "graphics")
+Making simple basic graphics in R
+The structure usage is function(data, options) Whatever is specified after the command is called arguments. Each command or function has its own set of arguments, but they will all follow the same structure. Please note that:
+
+Some plotting functions in R can be used with either a whole data set, or specific data from a data frame (such as “plot()”), but others need data to be specified (such as “hist()”)
+you can also provide your data with no options. This will generate an automatic graph of the data and will use the default options of the command.
+Histogram with function “hist()”
+
+Step 1. Why choose histograms to represent your data? Generally because you want to show the distribution of numerical data. To see examples of graphs you can generate with “hist()”, use the function “example()”
+
+> example("hist")
+Step 2. Usage:
+
+hist(x, …)
+
+example of possible arguments (https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/hist)
+
+hist(x, breaks =, freq =, probability =, include.lowest =, right , density =, angle , col =, border =, main =, xlim =, ylim =, xlab =, ylab =, axes =, plot =, labels =, nclass =, warn.unused =, …)
+
+Note . We need to specify which specific data from the iris data set we want to represent. The x corresponds to the data to represent. The following arguments are generally parameters that impact the graphical output.
+
+Step 3. Let’s generate a histogram of Sepal.Length using default (only the data is specified) or advanced arguments.
+
+Default arguments will output a histogram in a simple format (default naming of axis, colors, font…), but note how the axes have been optimized for the data.
+
+> hist(iris$Sepal.Length)
+histogram of Sepal.Length using default arguments
+
+Using advanced arguments can allow you to customize different features in your output. The following options will rename the x-axis (xlab), give a title to the graph (main), color the borders (border), color the bars (col), and modify the y-axis limits (ylim)
+
+> hist(iris$Sepal.Length, xlab="Sepal Length", 
+main="Histogram of Sepal Length", border="white", 
+col="red3", ylim=c(1, 40))
+same histogram using advanced arguments
+
+Note. Colors can also be specified using the HEX (hexadecimal) color code. You can find more information on HEX color codes in https://www.color-hex.com/
+
+Histogram of Sepal.Length with the same arguments as before, except that we will remove the borders and color the bars with the same red colour but using now the HEX color code
+
+> hist(iris$Sepal.Length, xlab="Sepal Length", 
+main="Histogram of Sepal Length", border=FALSE, 
+col="#CD0000", ylim=c(1, 40))
+same histogram but with removed the borders and colour of the bars red
+
+Plot with function “plot()”
+
+Step 1. As you can imagine, plot is a generic term to design a wide range of graphics. The function “plot()” allows us to create many different plots
+
+> methods(plot)
+Step 2. Usage:
+
+plot(x, y,…)
+
+example of possible arguments (https://www.rdocumentation.org/packages/ROCR/versions/1.0-11/topics/plot-methods)
+
+plot(x, y, type=, main=, xlab=, ylab=, pch=, col=,…)
+
+Note. Here type specifies the type of plot that can be generated and are of many types such as “p” (points), “l” (lines), “b” (both), “o”, (both overplotted), etc
+
+Step 3. With “plot()”, you can either use by default the whole data set or specify which specific data from the iris data set we want to represent.
+
+Scatterplot of the whole dataset
+
+> plot(iris) 
+Scatterplot of the whole iris dataset
+
+Scatterplot using specified data (Sepal.Length vs. Petal.Length). Remember that these are continuous numeric data. You can test how to produce the same output with:
+
+Option 1
+
+> plot(iris$Sepal.Length, iris$Petal.Length)
+Option 2
+
+> plot(Petal.Length ~ Sepal.Length, data=iris)
+Option 3
+
+> plot(Petal.Length ~ Sepal.Length, iris)
+Option 4
+
+> with(iris, plot(Sepal.Length, Petal.Length))
+Scatterplot using specified data (Sepal.Length vs. Petal.Length)
+
+Scatterplot using specified data and options. We will shape the points with pch, change their size using cex, and their color using col
+
+> plot(iris$Sepal.Length, iris$Petal.Length, 
+main="Sepal vs Petal Lengths", xlab="Sepal.Length", 
+ylab="Petal.Length", pch="*", cex=2.0, col="red3") 
+Scatterplot using specified data and options.
+
+Scatterplot using specified data and options to change the background color and margin sizes with “par()”, a function used to specify general graphical parameters such as bg (background color), or mai (margins in inches for bottom, left, top and right)
+
+> par(bg="lightgrey", mai=c(2,1,2,1.5))
+> plot(iris$Sepal.Length, iris$Petal.Length, 
+main="Sepal vs Petal Lengths", xlab="Sepal.Length", 
+ylab="Petal.Length", pch="*", cex=3.0, col="red3")
+Scatterplot using specified data and options to change the background color and margin sizes 
+
+Note. You can quit these global graphical options by using “dev.off()”, or closing the graphical display
+
+Saving a plot
+By default, any plot you generate will be displayed in your graphic device window. To save a plot, you will have different options.
+
+Option 1. First choose the output format (such as jpeg, png, pdf…), name your plot, generate it, then escape by closing the file. You will find the saved file in your working directory.
+
+To make and save a file using default options
+
+> pdf('test_hist.pdf')
+> hist(iris$Sepal.Length)
+> dev.off()
+To make and save a file using advanced options, such as width and height (in inches)
+
+> pdf('test_hist.pdf', 7, 10)
+> hist(iris$Sepal.Length)
+> dev.off()
+Option 2. If you already generated your plot, and forgot to create the output file first, you can still use the “dev.copy()” command, with both the default or advanced options
+
+> hist2(iris$Sepal.Length)
+> dev.copy(pdf,'test_hist2.pdf')
+> dev.off()
+Note. These options will work with any OS (Linux, Mac, Windows). Some OSes offer the possibility to save the graphic window that opens with the “Save” or “Save as” option.
+
+Exercise and Discuss - Working on Simple Plots
+21 comments
+Practise simple plotting in R
+
+Question 1
+Based on the same plotting principles you saw with the “plot()” function, can you draw a boxplot of the whole iris dataset?
+
+Question 2
+Based on the same plotting principles you saw previously, can you draw a boxplot of the Sepal.Width (x-axis) and Petal.Width (y-axis) from the iris dataset?
+
+Question 3
+Can you add to the previous boxplot the title “Boxplot Petal.Width vs. Sepal.Width”, and colour the boxplot using the “LightBlue” colour with its HEX colour code, and colour borders in “DarkSlateGray” with its HEX colour code?
+
+Hint: you can browse websites dedicated to color code conversions to find the correspondence between a colour name and its HEX colour code, there are many available.
+Please try to answer the questions yourself first and then compare the results with other learners. When you have tried the exercise, you can find solutions in the download area.
+
+Solution 1.
+To draw the boxplot, use the following
+> boxplot(iris)
+Solution 2.
+To draw the boxplot, use the following
+> boxplot(Petal.Width ~ Sepal.Width, data=iris)
+Solution 3.
+To draw the boxplot, use the following
+> boxplot(Petal.Width ~ Sepal.Width, iris, col="#add8e6", border="#2f4f4f", main="Boxplot Peal.Width
+vs. Sepal.Width")
+Expected output:
+
+
+
+Bioinformatics - What is RStudio
+[00:00:00.47] [MUSIC PLAYING]
+[00:00:07.52] At this stage of the course, you should be able now to easily create variables, or
+read and manipulate data frames, as well as creating simple graphs with ease. This is because all
+what we covered in basic R will be helpful for this upcoming part of the course where we will be
+working with RStudio. So for the next two steps, let's start first seeing together what RStudio is
+and then how to use RStudio.
+[00:00:33.29] You should have now properly installed RStudio from the first steps of the course.
+So open it by simply clicking on it. And let's have first a general presentation of RStudio. And
+then we will see together how the RStudio interface works.
+[00:00:49.88] So RStudio is a free and open source integrated development environment, or IDE,
+for abbrv. RStudio runs on all the major operating systems, such as Windows, Linux, and Mac.
+What you are seeing now in the screen is the RStudio interface that should contain generally four
+different areas, or quadrants, each devoted to give you access to a certain type of information.
+Now, what are all these areas?
+[00:01:21.06] So let's start with the bottom left quadrant. So this one is, by default, the console,
+as you can see it written here. And it is what reproduces the exact same terminal access to R that
+we used before in R, except of course, that it will open directly in our session. You can see here
+that you have the greater than, or superior sign as a prompt. But this area also allows you to
+access other resources, such as your main terminal here through the terminal tab. But we will be
+using the console for now.
+[00:01:58.52] Now, the bottom right quadrant, which is this one, has many functions. It is what
+allows you to access your working directory. So if I click here on Files, you will be able to
+access either your working directory or the directories through that Files tab. You can also create
+a new folder. You can delete or rename folders. And many more actions you can do here.
+[00:02:25.10] It is also where you will be able to view the plots you generate through the Plots
+tab. So of course, we don't have any plots now. But once you generate them, you will be able to
+see them through this tab.
+[00:02:39.38] You can also from instal and load packages through the Packages tab. And you
+can also have access to other information, such as the Help tab here. So for example, it can allow
+you to interrogate a certain function for its usage.
+[00:02:56.31] So let's say that you want to click, for example, on a package. So these are all the
+packages that you have installed. So some of them are installed by default. Some others will be
+installed because you want them to be there. So we will see examples of that. 
+[00:03:12.06] But here, let's imagine that we want to see what this base package is. So if you
+click on it, you will have the help of the documentation and the help for the package that is called
+a call base.
+[00:03:30.10] Click and go to the top right quadrant now. It is by default the environment. And it
+is where you will find information on the objects you're working with, such as the variable that
+you are generating while you work. As long as you work here in your console, you will be seeing
+your variables generated in here. So you can easily remember them.
+[00:03:54.01] And I loaded for you here as an example the iris dataset. This quadrant should, of
+course, be empty when you open RStudio by default. But just for the sake of giving you an
+example, I just loaded the iris dataset before. So from this quadrant, you will also be able to
+access the history of all your commands from this area when clicking on this tab.
+[00:04:19.21] The final quadrant, which is the top left quadrant, is what we call the source area.
+And it is where you will generally view the source content of a script, for example. It could be an
+existing file that you directly open from files existing here. Or it could also be a new one that you
+are creating, and where you can add comments that are successful as long as you are generating
+commands, or typing commands in the console. The fact that commands are placed into files
+would allow you, of course, to manipulate them very easily later on, and to retrieve them very
+easily.
+[00:05:01.49] So you can access all these areas of quadrants at the same time, as you can see it
+here. Or you can simply click to reduce or expand some of them to reorganise your interface
+according to your preferences, of course. So let's say for example, that I want to view mainly the
+console and not necessarily the script. So I just click on the small icon, and I will have the
+console taking this area.
+[00:05:30.44] I can also reduce it completely, or I can restore the first version of it. I can also
+click on any of these quadrants to do exactly the same. I am not going into the details of
+modifying other basic settings, such as the background colour or the default working directory.
+But there are many other settings you can adjust. So know that it is feasible from the Preferences
+of RStudio. So if you open your Preferences, you will be able to access a lot of different settings,
+such as the Default Working Directory, for example, or the appearance of your screen.
+[00:06:10.69] In short, if we can summarise what we saw in this first video, the RStudio
+interface is very intuitive. It is organised in a way that allows you, as a user, to clearly view in
+one single interface many information, such as the code you are using here, the commands you're
+writing or executing here, the variables you are creating, or the graphics you're generating. So it
+basically offers the possibility to interact with an R based environment through a user interface
+solution such as simply clicking on File, for example, to open it, without having to write or code
+in R to do so.
+[00:06:51.88] In the next video, or step, we will start learning together how to use RStudio. 
+
+
+Data Visualisation Packages and Principles - a Focus on ggplot2
+1 comment
+As we saw, much of what is done with R can also be done in RStudio.
+
+Data Visualization in RStudio
+Introduction
+
+As we saw, many things you do with R can also be done in RStudio. We would advise you to take some time to test in RStudio a few commands we used previously in R, and put in a Script what you want to use later. We would also recommend that you take some time to get familiarized with the RStudio display and test the options you can use through the user interface. This will be useful for the upcoming steps, where we will need to install packages, load them, use them, and generate plots using ggplot2.
+
+Data visualization packages in R/RStudio
+For the rest of the Steps, we will see how to use a dedicated package in RStudio for data visualization, called ggplot2.
+
+Many packages exist that are devoted to data visualization.
+
+The base graphics comes for example with the graphics package, and allows you to generate simple plots and then to improve aspects of the plot possibly through series of functions (we saw a quick example with “par()” and “plot()”).
+
+The lattice plotting system is implemented with other packages such as the lattice package, which supports generating trellis graphs. It is generally used with a single function call that would specify all graphical parameters, which allow R to automatically compute the necessary graphical display.
+
+With the ggplot2 package, we are almost combining both concepts. This package is based on using the grammar of graphics concept. It became so popular, that many other data visualization packages can complement it or use it, or are based on the same concepts. Examples of other packages are ggforce or ggvis.
+
+It is also possible now to create more advanced interactive graphs in R/RStudio using packages such as Plotly or Shiny.
+
+The grammar of graphics: basics of ggplot2
+The grammar of graphics is the concept of using a particular grammar or language to specify and create certain statistical and graphical displays for data visualization. Applied to ggplot2, the grammar of graphics is implemented in a layered approach, using layers of information (data complemented with statistical or graphical information) to build up step by step to a final display of a graph. Layers complement each other in ggplot2 with different information types such as the aesthetics, the geometries, the faceting, the scales, the themes, the coordinates, the labels, and many others.
+
+Here are explanations of some of these layers :
+
+ 	 
+DATA	The data you want to plot
+AESTHETICS	The graphical properties of data on the plot (x, y, …)
+GEOMETRIES	The graphical elements that determines the visual display of a plot (point, line, bar, area, …). Each geometric object is related to specific aesthetics. For example, a geometric object “point” is related to aesthetics shape, size, color and position
+FACETING	reorganizes the variables of a data into subsets with a certain graphical arrangement of elements
+SCALES	defines how data is mapped as related to aesthetics (item colors according to their class, …)
+THEMES	customizes non-data related display by defining options not directly related to the data itself
+COORDINATES	customizes the coordinates
+LABELS	sets plot title, legend or axis names
+layers of grammar presented as parallel layers of different elements
+
+Data Visualisation with ggplot2 - Setting Data, Aesthetics and Geometries
+7 comments
+Making data visualisations in RStudio.
+
+Data Visualisation with ggplot2
+Introduction
+
+Let’s load our data set of interest, install and load all the packages we need, and start making data visualizations in RStudio.
+
+Good practice
+
+A good practice is to load the packages you need before starting your analysis. It is also recommended to write the packages you need in the script you prepare for a project. This is a list of convenient packages to use with ggplot2
+
+> library(ggplot2)
+> library(RColorBrewer)
+> install.packages("viridis")
+> library(viridis)
+Note. Another widely used package in data science is called tidyverse, and is a collection of packages including ggplot2, dplyr and many other helpful resources. It can be worth trying to use it on your own after this course.
+
+Setting your working directory in RStudio
+Step 1. We recommend you to work in the Project folder Project_Test that we created previously, either by clicking directly on the Project_Test or using the following command
+
+> setwd("/Users/imac/Desktop/exerciseR/Project_Test")
+> getwd()
+[1] "/Users/imac/Desktop/exerciseR/Project_Test"
+Step 2. As a reminder, you can create a specific script file to write your commands and related comments.
+
+Setting your data
+Step 1. Import or load the iris dataset we want you to work on in RStudio. All options are identically accessed in R, but the two final options are particular to RStudio.
+
+From your computer, if you placed the iris dataset file in your working directory
+> Iris <- read.table("iris.txt")
+From your computer, if the iris dataset file is in the parent folder exerciseR
+> Iris <- read.table("/Users/imac/Desktop/exerciseR/iris.txt")
+From the available data sets in R
+> data(iris)
+From the “Import Dataset” tab in the Environment, by selecting the correct file with its type and parent folder.
+
+From the File menu, by choosing the “Import Dataset” option.
+
+Note 1. Be careful to choose the “iris” dataset as “Iris” would here correspond to the same data set but with changes that could impede the rest of the commands.
+
+Note 2. As other functions in R, the “read.table()” function has different options that you can view in the following link, which also shows you other functions used to import data from other file formats (for example with the “read.csv()” function to read “.csv” files). https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/read.table.
+
+Step 2. You can also display and work on specific data chosen from the iris data set
+
+> iris_length <- iris %>% select(Sepal.Length, Petal.Length)
+> head(iris_length)
+  Sepal.Length Petal.Length
+1          5.1          1.4
+2          4.9          1.4
+3          4.7          1.3
+4          4.6          1.5
+5          5.0          1.4
+6          5.4          1.7 
+Setting Aesthetics and Geometries
+Step 1. Let’s use basic layers to plot Petal.Length vs. Sepal.Length. With ggplot2, “aes()” specifies aesthetics for x and y-axis, and “geom_point()” generates a scatterplot
+
+> ggplot(data = iris,aes(x = Sepal.Length, y = Petal.Length)) + 
+geom_point()
+Note 1. Here is an example of how you should see the output in your “Plots” area in RStudio. Note that you have the possibility to save your plot using the “Export” button, with options related to file formats. Other R options we saw for saving plots remain possible.
+
+Note 2. We will not show the whole area again, but remember that the plots you generate will appear here.
+
+Step 2. Using the same previous plot options, let’s color the points according to the Species
+
+> ggplot(data = iris, aes(x = Sepal.Length, y = Petal.Length, color = Species)) + geom_point()
+scattergraph with different species in different colours
+
+Step 3. There are other possible shorter ways for generating this same output
+
+> ggplot(iris, aes(Sepal.Length, Petal.Length, color = Species)) + 
+geom_point()
+Note. However, for the sake of clarity, we will mainly keep the full details such when using data, x and y to ease the understanding
+
+scattergraph mono colour species
+
+Step 4. It is possible to create a variable with your base aesthetics and then simply call it to apply other layers. The following will create the same output as the previous graph
+
+> key <- ggplot(data = iris, aes(x = Sepal.Length, y = Petal.Length, , 
+color = Species))
+> key + geom_point()
+Step 5. Different geometries can also be used to complement each other. Here “geom_smooth()” adds a trend line and area to the points
+
+> key + geom_point() + geom_smooth()
+scattergraph with trend line
+
+Step 6. You should have noticed how geometries are here added with default options. Each has a set of options, such as removing the trend area in the following with se=FALSE
+
+> key + geom_point() + geom_smooth(se=FALSE)
+scattergraph with smooth trends
+
+Step 7. You can easily change the points size, shape and colour from “geom_point()” options, but see how it affects the display: if you force one colour, you will not have any more colors by Species, even if they are required in the key variable
+
+> key + geom_point(size=4, shape=15, color="red3")
+scatter graph with red dots
+
+Step 8. Or the size, shape and color as dependent now on Sepal.Length values from aes
+
+> ggplot(data = iris, aes(x = Sepal.Length, y = Petal.Length, 
+color = Sepal.Length, size = Sepal.Length)) + geom_point()
+scatter graph with blue dots
+
+Note. We used here the default ggplot2 colors, but we will see later on how to use other color palettes
+
+Other Functions and Plots
+Step 1. Remember that we are only covering here the “ggplot()” usage, but other possibilities exist to generate the same output as in Step 6 of this Article, such as “qplot()” which is used to generate quick plots with ggplot2
+
+> qplot(Sepal.Length, Petal.Length, data = iris, color = 
+factor(Species)) + 
+geom_point() + 
+geom_smooth(se=FALSE)
+Step 2. Generating different plots will require different geometries
+
+Boxplot with default options
+> ggplot(data = iris, aes(x = Sepal.Length, y = Petal.Length, 
+color = Species)) + geom_boxplot()
+box plot with default options
+
+Bar plot with default options
+> ggplot(data=Iris,aes(x=Sepal.Length)) + geom_bar()
+bar plot with default options
+
+Or more complex ones even with default options such as Density plot
+> ggplot(data=Iris,aes(x=Sepal.Length, y = Petal.Length)) + 
+geom_density_2d_filled()
+density plot with default options
+
+Step 3. An important thing to remember is that each plotting functions comes with its own set of option, that might not work for other functions. Let’s see how to generate and modify histograms
+
+Default options
+> ggplot(data=Iris,aes(x=Sepal.Length)) + geom_histogram()
+black and white histogram
+
+Filling histogram colurs by Species. Note how calling the colour option is different here
+> ggplot(data=Iris, aes(x=Sepal.Length,fill=Species)) + 
+geom_histogram()
+
+colourful histogram
+
+Use binwidth option with histograms
+> ggplot(data=Iris,aes(x=Sepal.Length,fill=Species)) + 
+geom_histogram(binwidth = 0.05)
+binwidth histogram in colours
+
+Note. A wide range of different plots can be generated with ggplot2 such as Bar plots, Boxplots, Violin Plots, Density Plots, Area Charts, Correlograms…and many many more !
+
+Exercise and Discuss - Working on Simple Plots
+21 comments
+Practise simple plotting in R
+
+Question 1
+Based on the same plotting principles you saw with the “plot()” function, can you draw a boxplot of the whole iris dataset?
+
+Question 2
+Based on the same plotting principles you saw previously, can you draw a boxplot of the Sepal.Width (x-axis) and Petal.Width (y-axis) from the iris dataset?
+
+Question 3
+Can you add to the previous boxplot the title “Boxplot Petal.Width vs. Sepal.Width”, and colour the boxplot using the “LightBlue” colour with its HEX colour code, and colour borders in “DarkSlateGray” with its HEX colour code?
+
+Solution 1.
+To draw the boxplot, use the following
+> boxplot(iris)
+Solution 2.
+To draw the boxplot, use the following
+> boxplot(Petal.Width ~ Sepal.Width, data=iris)
+Solution 3.
+To draw the boxplot, use the following
+> boxplot(Petal.Width ~ Sepal.Width, iris, col="#add8e6", border="#2f4f4f", main="Boxplot Peal.Width
+vs. Sepal.Width")
+
