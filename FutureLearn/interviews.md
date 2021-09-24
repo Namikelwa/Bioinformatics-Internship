@@ -143,3 +143,141 @@ about their capabilities and how they will encounter your work to understand som
 decisions that you need to make. So it is absolutely a blend of the science but also the art. And by
 art, I don't mean necessarily just creativity, but the art of judging these imperfections about
 human responses and the situations that they go through. 
+
+Bionformatics - Fatma & Andy Interview - Part 2
+[00:00:00.00] [MUSIC PLAYING]
+[00:00:08.62] We are facing today a very massive amount of continuously released data. And the
+problem is that, with this increased amount of big data, comes a flood of publications with
+visually unreadable, and sometimes really uninterpretable results. I know that from the big
+networks. Whether we know that an appropriate data visualisation lies in there really at the heart
+of impactful publishing.
+[00:00:35.02] So what would be your advice to others to publish their findings in an appealing
+manner to allow the correct output reading, the understanding, and reuse by the scientific
+community. So are they kind of requirements in terms of aesthetics level, for example, and but
+that's part of what art you were talking about.
+[00:00:56.91] Yeah, and I think this is where we do perhaps advise starting with the notion of
+simplifying. And I think one of the things that's inevitable and it's understandable, but one of the
+traps that a lot of researchers and academics will get into is, thinking that the only people who
+will be reading their work are experts with the exact same knowledge, and the exact same
+interest in a subject. And that's very rarely the case. Even if you are sharing things with
+scientists, not everybody has the immediacy to understand what's being portrayed.
+[00:01:31.16] So the first thing is, start off simplifying things. Remove redundancies. Remove
+the things are overly technical that can be explained in a more accessible fashion. Now, you
+talked about aesthetics and appeal, and I did mention that as a key principle that you should
+aspire towards. But I also think in terms of the journey, that some go through in developing more
+refined skills in this sense. If you start off by simplifying things, if you start off by trying to just
+clarify things, a certain elegance will emerge from that. Because people will experience it in a
+way that is accessible, and that in itself becomes elegant.
+[00:02:13.14] Now, as you become more confident, and through repeated exposure, repeated
+practise, and by looking beyond your domain, and seeing what people in the media are doing,
+people in sports analytics, in retail. Look beyond your domain And even if it's not about the same
+topic that you are visualising, it may still be about how someone shows change over time, or how
+two categories compare, or how two variables seem to call some relationship.
+[00:02:44.61] Everyone is doing the same analysis. It's just about different topics. So don't just
+think that your world is unique in terms of visual treatment. It won't be. The meaning will be.
+But look elsewhere. Be inspired, and just gradually clarify, simplify, and then you might start
+become more ambitious, and then you might start having more confidence and more flair, to seek
+more appealing aesthetics.
+[00:03:12.10] But don't try and reach that overnight, instantly, in a single step. See it is a journey
+of improvement, of continuous improvement. But step by step you will find success. Because
+people will be able to see what it is you're saying. 
+[00:03:27.78] Yeah, I really feel that this is really important in everyday life. So even if you're
+looking for a job, or I don't know, presenting your last project in your enterprise, or whatever. I
+mean, even in the life of a scientist, there are moments in life where you have to present data in
+an adjusted way, data that you spent hours or years to release. And I read somewhere that it
+might take you about 80% of your time just cleaning the data before visualising it, in order not to
+overload and lose that message.
+[00:04:04.60] So what would be your advice to a person willing to present-- let's imagine a three
+year long project to scientists and or non scientists, not in 3 minutes as we usually see it now, but
+explain it in three main figures. Would you rather recommend an out-of-the-box approach, as
+you were saying. Or also, because it is important for them to understand and rapidly get that
+message, to do it an innovative way, but stick to known graphics, and something that they are
+used to see, but presented in a different way.
+[00:04:45.09] Yeah there's a few things about that. First of all, it's very easy for us to look around
+at all the wonderful new, innovative ideas, and think that there's no role for the bar chart or for
+the line chart anymore. Because they're old charts. We need to move on. We still need those.
+Those are the workhorses of the field. There's a time and place for every chart. But crucially,
+every chart answers a data question.
+[00:05:14.33] So one of the key things that we always need to establish, before we get excited
+about the ways that we might present our data, is to determine what it is we are trying to answer
+through an individual chart panel, or through a sequence, like you mentioned. So when you are a
+researcher, and you spent three years, and you are so close to this data. You need to find a way to
+step away, to take that breather, to think clearly about, OK, what is it that someone looking at
+this work will be able to get an answer to. And write it down in language.
+[00:05:47.20] What are the curiosities that you're trying to answer? Because there'll be a bunch
+of chart types, or even just a chart type in itself that will be the best method to convey an answer
+to that question visually. So questions are crucial. Questions are everything. In fact, questions
+come before data. Because we collect data in response to a question. So get into that habit. Get
+into that behaviour. Write down questions.
+[00:06:14.23] But I think secondly, don't be precious. I find that for good reason, a lot of
+scientists that I've worked with feel that every single data point is important. And it may be that
+every data point is valuable, of course, but there has to be a hierarchy. There must be some
+things that are more relevant, more important than others, for the constraints of what you
+mentioned there, which is a very short, brief engagement, an audience may have to look at
+something, and to understand something.
+[00:06:48.05] So don't treat all data points equally. Some need to be suppressed. Some need to be
+elevated. And find that editorial hierarchy that will allow you to focus on the key things, again,
+given the constraints that would exist. There'll be plenty of other opportunities to share all these
+fine details, but not in every situation to every type of audience. 
+[00:07:11.06] So sometimes we get a little bit doubtful about the notion of editorial thinking,
+thinking that somehow it's massaging results, or hiding things. No, it's about editing. It's about
+choosing what to include, and what to exclude. And we do that in everything. We do that in
+conversations. We do that in written form. We do that in text messages, tweets. We choose to say
+things and how we say them. So that perspective of editorial thinking and question writing will
+help people to navigate through those constraints.
+[00:07:45.79] Yeah, I'm really happy that you addressed this question this way. Because we are
+seeing in that particular research field, you're talking about it in a very large sense. And I very
+much love that, because we're facing these challenges every day, even in a single Twitter
+message. But really addressing it from also a researcher perspective, is really important. Because
+we see students sometimes, or even concerned researchers, presenting so much data at the same
+time, that you really lose that important message.
+[00:08:17.68] So one last thing I wanted to discuss is, I read a sentence that Henry Ford was
+saying about this topic of coming together is the beginning, he said. Keeping together is
+progress, and working together is success. And in that particular field, I thought that it showed
+the importance of a dynamic approach to data visualisation, and that should be driven by the fact
+that before actually you're able to sell a bin as we say, you really have to know more about the
+person who is going to buy it.
+[00:08:53.39] So I know we touched that subject a little bit in the previous question, but I really
+want to focus a little bit more on that to finish on this important topic. Do you think that when
+we have to visually present our data, we should present it not in the way we see it, but in the way
+the audience will see it, and continuously keep adapting yourself to that particular audience. The
+same data can be presented in ten different ways to ten different people.
+[00:09:31.97] Correct. Now, it's not always practical to be able to share in ten different ways.
+And I think the first thing to acknowledge is, and again, this touches on the notion of editorial
+thinking. Because sometimes, you just have to decide that you can't serve everyone's appetites.
+There'll be things that this person needs to know, and this person wants to know over here. You
+may have one chance. So who are you going to feed?
+[00:09:59.75] So you have to think about this sense of prioritisation. You have to think about the
+sense of, OK, as long as it suits that person's needs, this person over here may still find
+interesting contents, but if I try and do both, I will actually potentially do neither. So that
+judgement of who you will not feed, I think is very, very important in this case.
+[00:10:22.88] But yeah, I mean, the audience is something that's very easy for us in this world to
+say, design for your audience. Design for your audience. What it means is quite subtle. Because
+it is about the characteristics, the capabilities, the confidence. It's about the where. Is it in a
+journal article, very small size graphic? Is it on the mobile, or a tablet, on the move? Is it a huge
+display in a poster, where there is a presenter alongside the poster, and you can have a
+conversation about the piece. 
+[00:10:55.52] So there's lots of dynamics about the situation that someone would encounter a
+piece. But I think in terms of the idea there of collaborator think and teamwork, I think this is
+really important. Because sometimes, we try and do everything ourselves. And even if we can
+just introduce a second person's mindset, ask a colleague, ask a critical friend about, does this
+work for you? Does this help you understand this?
+[00:11:25.13] Feedback is really something we reluctantly seek out, but we should. We should
+ask people to test things, run things past people. And even if that is not a perfectly representative
+persona of the intended audience, it'll be better than none. And sometimes, we ourselves as
+creators, get too close to our work. And we lose sight of what it is we're trying to say.
+[00:11:50.13] So collaborating with others, getting other people to check things and test things,
+at the very least, is something that is going to give you the best chance of having the biggest
+impact with what it is you produce.
+[00:12:04.28] Thank you so much for all these advices, Andy. You gave us a lot already. Thank
+you very much for sharing this with us. Any last advice or recommendation that you would see
+important to discuss here.
+[00:12:19.43] Yeah, I think what's important is this is a subject that is attainable for anyone. We
+can all do better in how we communicate data visually. We do not have to be the most advanced
+technologist, the most brilliantly talented designer. It's all about caring about the communication,
+what it is we want to say, how we want to say it, and who it's for. So gradually, you will get
+there. You'll find a way to improve what you're doing. It's not something that's overnight,
+necessarily. But you will find a way forward.
+[00:12:50.52] So Andy, I am sincerely grateful for the time you dedicated to share all your
+experience with us. And I wish you all the success for the future of your activities. Thank you.
+[00:13:00.79] Thank you. 
