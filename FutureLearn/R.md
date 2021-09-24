@@ -1530,3 +1530,326 @@ To draw the boxplot, use the following
 > boxplot(Petal.Width ~ Sepal.Width, iris, col="#add8e6", border="#2f4f4f", main="Boxplot Peal.Width
 vs. Sepal.Width")
 
+
+## Data Visualisation with ggplot2: Setting Facets and Scales
+4 comments
+Now that we learned how to choose our data, and apply layers of aesthetics and geometries, let’s explore other possible layers of information such as facets and scales.
+
+Good practice
+
+A good practice is to load the packages you need before starting your analysis. It is also recommended to write the packages you need in the script you prepare for a project. This is a list of convenient packages to use with ggplot2:
+
+> library(ggplot2)
+> library(RColorBrewer)
+> library(viridis)
+> install.packages("ggsci")
+> library(ggsci)
+Note that we need an extra package compared to the previous step.
+
+Setting your working directory in RStudio
+Step 1. We recommend that you work in the Project folder Project_Test that we created previously, either by clicking directly on the Project_Test or using the following command
+
+> setwd("/Users/imac/Desktop/exerciseR/Project_Test")
+> getwd()
+[1] "/Users/imac/Desktop/exerciseR/Project_Test"
+Step 2. As a reminder, you can create a specific script file to write your commands and related comments.
+
+Setting Faceting
+Step 1. Here is an example of how to facet the output by Species, using “facet_wrap()”, that requires the facets argument to be specified, i.e. here the Species
+
+> key <- ggplot(data = iris,aes( x= Sepal.Length,y = 
+Petal.Length, color = Species))
+> key + geom_point() + geom_smooth(se=FALSE) + 
+facet_wrap(~Species)
+faceted output of species
+
+Step 2. Other arguments with “facet_wrap()” give the possibility of fitting the y-axis scales to the values in order to optimize the output
+
+> key + geom_point() + geom_smooth(se=FALSE) + 
+facet_wrap(~Species, scale='free_y')
+faceted output of species optimised
+
+Setting Scales
+Scales for positions and axis
+
+Arguments for continuous x and y aesthetics are by default “scale_x_continuous()” and “scale_y_continuous()”. Variants include reversing order or transforming to a log scale. Please see usage in https://ggplot2.tidyverse.org/reference/scale_continuous.html
+
+It is also possible to plot discrete variables using “scale_x_discrete()” or “scale_y_discrete()”
+
+Step 1. To set x-axis limits using “scale_x_continuous()” with limits option
+
+> key + geom_point() + geom_smooth(se=FALSE) + 
+facet_wrap(~Species, scale='free_y') + 
+scale_x_continuous(limits = c(1, 10))
+faceted output with scaled x and y axis
+
+Step 2. To reverse the x-axis using “scale_x_reverse()”
+
+> key + geom_point() + geom_smooth(se=FALSE) + 
+facet_wrap(~Species, scale='free_y') + 
+scale_x_reverse()
+faceted output with reversed x axis
+
+Scales for colours, sizes and shapes
+Continuous colour scales can be specified using many options. Some are already pre-installed in RStudio, such as the RColorBrewer, but other specific colour palettes can be easily installed, loaded and used. Usage for “scale_colour_gradient()” or “scale_fill_gradient()” as examples can be found here https://ggplot2.tidyverse.org/reference/scale_gradient.html
+
+Step 1. Scales can be manually set by choosing specific colours, sizes and shapes
+
+> key + geom_point() + geom_smooth(se=FALSE) + 
+facet_wrap(~Species, scale='free_y') + 
+scale_shape_manual(values=c(3, 16, 17)) +
+scale_size_manual(values=c(2,3,4)) + 
+scale_color_manual(values=c('#669999','#a3c2c2', '#b30059'))
+scales set by choosing colours graph
+
+Step 2. Scales can be set using existing colour palettes from the RColorBrewer package
+
+> key + geom_point() + geom_smooth(se=FALSE) + 
+facet_wrap(~Species, scale='free_y') + 
+scale_color_brewer(palette="RdYlBu")
+Note. We use “scale_color_brewer()” to customize colours for lines or points, whereas we would use “scale_fill_brewer()” for filling colours of area, histogram bars, boxplots, etc
+
+graph, scales set using RColorBrewer
+
+Note. RColorBrewer palettes can be consulted with
+
+> display.brewer.all()
+RColorBrewer palette
+
+Step 3. Scales can use different options with other color palettes from the viridis package
+
+> new_key <- key + geom_point(aes(color = Species)) + 
+geom_smooth(aes(color = Species, fill = Species), method = "lm") + 
+facet_wrap(~Species, scale='free_y') 
+ 
+> new_key + scale_shape_manual(values=c(3, 16, 17)) +
+scale_size_manual(values=c(2,3,4)) + 
+scale_color_viridis(discrete = TRUE, option = "D") + 
+scale_fill_viridis(discrete = TRUE)
+Note. We changed options for “geom_point()” and “geom_smooth()” to show you some other possible display variations
+
+graph, scales in different options with other color palettes from the viridis package
+
+Step 4. Scales can use packages designed to offer color palettes taken from sources such as highly accessed journals. Examples are “scale_color_npg()” (from Nature Publishing Group), “scale_color_lancet()” (from The Lancet journal) or even “scale_color_tron()” (from the film “Tron: Legacy”). Remember that scale_color functions have their scale_fill counterparts
+
+> new_key + scale_color_tron() + scale_fill_tron()
+Graph, scales use tron() packages designed to offer color palettes taken from sources
+
+The particular case of missing values
+Step 1. Missing values (NA) can exist in any data set, and need to be taken into account when plotting data. Let’s use this very simple data frame containing NA values
+
+Plotting with default colors in ggplot2. By default, a grey colour will be used for NA
+> df_test <- data.frame(x = 1:10, y = 1:10, 
+z = c(1, 2, 3, NA, 5, 6, 7, NA, 8, NA))
+> plot_test <- ggplot(df_test, aes(x, y)) + 
+geom_tile(aes(fill = z), size = 10)
+> plot_test
+Plot with default colours
+
+We can ask to have no colour of NA values
+> plot_test + scale_fill_gradient(na.value = NA)
+graph, no colours on missing values
+
+Or color NA values in a chosen colour, such as “red3” here
+> plot_test + scale_fill_gradient(na.value = "red3")
+graph, red colour on no missing value
+
+Or use another colour palette, instead of default ggplot2 colours, and you will still be able to specify the NA values. Because we need many colors in this palette we use “scale_fill_gradientn()” instead of “scale_fill_gradient()”
+> plot_test + scale_fill_gradientn(colours = viridis(7), na.value = "white")
+graph, viridis colour palette for NA
+
+
+
+## Data Visualisation with ggplot2: Setting Themes, Coordinates and Labels
+2 comments
+Data Visualisation in RStudio - other possible layers of information such as facets and scales
+
+Introduction
+
+Now that we learned how to choose our data, and apply layers of aesthetics and geometries, let’s explore other possible layers of information such as facets and scales.
+
+Good practice
+
+> library(ggplot2)
+> library(RColorBrewer)
+> library(viridis)
+> library(ggsci)
+Setting your working directory in RStudio
+Step 1. We recommend you to work in the Project folder Project_Test that we created previously, either by clicking directly on the Project_Test or using the following command
+
+> setwd("/Users/imac/Desktop/exerciseR/Project_Test")
+> getwd()
+[1] "/Users/imac/Desktop/exerciseR/Project_Test"
+Step 2. As a reminder, you can create a specific script file to write your commands and related comments.
+
+Setting Themes
+Themes encompass options for the general graphical display of a graph, by modifying non-data output such as the legends, the panel background, etc… You can refer to “theme()” usage including examples in https://www.rdocumentation.org/packages/ggplot2/versions/3.3.3/topics/theme
+
+Step 1. We will use the same new_key variable that we created in the previous Step
+
+> new_key <- key + geom_point(aes(color = Species)) + 
+geom_smooth(aes(color = Species, fill = Species), 
+method = "lm") + facet_wrap(~Species, scale='free_y') 
+> new_key + scale_color_tron() + scale_fill_tron()
+graph, using new_key variable from the step before
+
+Step 2. By default the themes are set to “theme_grey()” (or gray). The same previous output will be displayed if you type:
+
+> new_key + scale_color_tron() + scale_fill_tron() + theme_grey()
+Step 3. Don’t forget that, as for other functions, you can learn about other variants and options of themes while typing the command in RStudio. If not, simply start typing the function and hit the TAB button on your keyboard. Here is different theme:
+
+> new_key + scale_color_tron() + scale_fill_tron() + theme_minimal() 
+graph with iron colours and minimal theme
+
+Step 4. You can now customize the background color, and also set the legends positions. Here is an example on how to place the legend at the bottom.
+
+> new_key + scale_color_tron() + scale_fill_tron() + 
+theme_minimal() + theme(legend.position = "bottom", 
+panel.background = element_rect(fill = "#e0ebeb"), 
+legend.key = element_rect(fill = "#669999"))
+graph, with background colour and legend set
+
+Step 5. Note the difference hereafter if when we leave the default theme (just by removing “theme_minimal()” to come back to basic)
+
+> new_key + scale_color_tron() + scale_fill_tron() +  
+theme(legend.position = "bottom", panel.background = 
+element_rect(fill = "#e0ebeb"), 
+legend.key = element_rect(fill = "#669999"))
+graph, back to basic theme
+
+Step 6. It is also possible to customize the position or justification of your legend. To do this, you can use “theme_position()” to set the position in the whole panel, and “theme_justification()” to set the position in the legend area. They are defined with a vector of length 2, indicating x and y positions in terms of space coordinates, where c(1, 0) is the bottom-right position
+
+> new_key + scale_color_tron() + scale_fill_tron() + 
+theme(legend.position=c(1,0), legend.justification = c(1, 0))
+ graph with customized position of legend
+
+Setting Coordinates
+The coordinate system controls the position of objects into the main panel, as well as axis and grid lines display. The most classically used are cartesian coordinates, but many other exist
+
+Step 1. Let’s start with “coord_cartesian()” which is set by default. The following commands will have the same output
+
+> new_key + scale_color_tron() + scale_fill_tron()
+> new_key + scale_color_tron() + scale_fill_tron() 
++ coord_cartesian()
+Step 2. We are now used to see specific options with each function. Let’s fix a ratio from x to y axis, and see how this affects the display in the main panel
+
+> new_key2 <- ggplot(data = iris) + geom_point(aes(x = 
+Petal.Length, y = Petal.Width, color = Species)) + 
+facet_wrap(~Species) + scale_color_tron() + scale_fill_tron()
+ 
+> new_key2 + coord_fixed(ratio = 2)
+Note. The panel borders colored in grey show you the new display
+
+graph illustrating cartesian coordinates
+
+Step 3. A logarithmic transformation can be applied to x and y-axis
+
+> new_key2 + coord_trans(x = "log2", y = "log2")
+graph illustrating logarithmic coordinates
+
+Step 4. It also possible to swap x-axis values to y-axis and vice-versa
+
+> new_key2 + coord_flip()
+graph illustrating x and y axis swapped
+
+Step 5. Compare these 2 outputs to see how it changes the display for other plot types
+
+Barplot
+> new_key3 <- ggplot(iris, aes(x=Petal.Length, Petal.Width)) 
++ geom_bar(stat="identity", fill="white", color="red3")
+> new_key3
+Right Barplot
+> new_key3 + coord_flip()
+graph illustrating output compare
+
+Setting Labels
+The Labs or Labels system controls the legend, axis and plot labels. You can find examples and usage here https://ggplot2.tidyverse.org/reference/labs.html
+
+Step 1. Let’s start with default “labs()” to set the legend title. The following commands will have the same output
+
+> new_key + scale_color_tron() + scale_fill_tron()
+> new_key + scale_color_tron() + scale_fill_tron() 
++ labs(color = "Species")
+Step 2. Notice how we modify the legend title by:
+
+> new_key + scale_color_tron() + scale_fill_tron() + 
+labs(color = "Iris_Species")
+graph illustrating modified legends
+
+Step 3. To modify also the x-axis and y-axis names
+
+> new_key + scale_color_tron() + scale_fill_tron() + 
+labs(color = "Iris_Species", x = "Sepal Length values", 
+y = "Petal Length values")
+graph illustrating modified names
+
+Step 4. Note that it might often be possible to do the same thing using different functions or options. Let’s see 2 options to add a title
+
+> new_key + scale_color_tron() + scale_fill_tron() + 
+labs(color = "Iris_Species", x = "Sepal Length values", 
+y = "Petal Length values", title = "Petal vs. Sepal Legnth")
+
+ 
+> new_key + scale_color_tron() + scale_fill_tron() + 
+labs(color = "Iris_Species", x = "Sepal Length values", 
+y = "Petal Length values") + ggtitle("Petal vs. Sepal Legnth")
+graph illustrating added titles
+
+
+## Working with ggplot2
+10 comments
+Here are some questions on Working with ggplot2 for you to check your learning so far. Please discuss your answers with other learners in the discussion section below:
+
+Question 1.
+What is the difference between the 3 following commands?
+
+> ggplot(data=iris, aes(x=Sepal.Length, y=Petal.Length, 
+color = Species)) + geom_point()
+> ggplot(iris, aes(x=Sepal.Length, y=Petal.Length, 
+color = Species)) + geom_point()
+> ggplot(iris, aes(Sepal.Length, Petal.Length, 
+color = Species)) + geom_point()
+Each will produce a different output
+They will produce the same output
+Only the first one is correct
+Only the second one is correct
+Only the third one is correct
+I don’t know
+Question 2.
+In your opinion, what is the correct command that should have generated the following plot (knowing that this type of plot is called a boxplot)
+
+Option 1
+> ggplot(data = iris, aes(x = Sepal.Length, y = Petal.Length))+ 
+geom_boxplot()
+Option 2
+> ggplot(data = iris, aes(x = Sepal.Length, y = Petal.Length))+ 
+geom_boxplot() + facet_wrap(~Species)
+Option 3
+> ggplot(data = iris, aes(x = Sepal.Length, y = Petal.Length, 
+color = Species)) + geom_boxplot()
+boxplot generated by the commands in question
+
+Question 3.
+Consider the following command that generated the associated plot below:
+
+> ggplot(data = iris, aes(x = Sepal.Length, y = Petal.Length, 
+color = Species)) + geom_boxplot() + geom_smooth(se=FALSE) + 
+facet_wrap(~Species, scale='free_y') + 
+scale_color_brewer(palette="RdYlBu")
+plot generated  in question 3
+
+Which layer(s) should we add in order to produce the following plot?
+
++ facet_wrap(~Species)
++ facet_wrap(~Species, scale='free_y')
++ facet_wrap(~Species, scale='free_y') + 
+labs(x = "Sepal Length", title = "Petal vs Sepal Length")
++ facet_wrap(~Species) + labs(x = "Sepal Length", 
+title = "Petal vs Sepal Length")
++ facet_wrap(~Species, scale='free_y') + labs(y = "Petal Length", 
+title = "Petal vs Sepal Length")
+plot generated in question 3 with layers
+
+Please try to answer the questions yourself first and then compare the results with other learners. Finally, you can find solutions in the download area.
+
+
