@@ -1,5 +1,5 @@
-How to Install R and RStudio
-16 comments
+## How to Install R and RStudio
+
 How to install R on different computers
 
 Instructions for Mac Users:
@@ -58,8 +58,8 @@ Discussion
 Please use the comments section below to discuss any problems you encounter – facilitators on this course will be checking your comments and some of your fellow learners might be able to help as well. If you still need help, there is also Week 3 Help area where you can also post your question.
 
 
-Let’s Begin with R!
-29 comments
+## Let’s Begin with R!
+
 What is R?
 
 R is a “language and environment for statistical computing and graphics”. R is an integrated suite of facilities for data manipulation, calculation and graphical display. Among other things it has:
@@ -153,8 +153,8 @@ Question 4. Did you manage to get out of the help command as indicated?
 
 
 
-How to Create and Manipulate Variables and Vectors in R
-25 comments
+## How to Create and Manipulate Variables and Vectors in R
+
 Variables and Vectors in R
 
 As we just saw previously in Step 3.4, when working under your current R session, the entities that R creates and uses are called “objects”.
@@ -388,8 +388,8 @@ SOLUTION 3.
 
 
 
-How to Create and Manipulate Lists and Data frames in R
-7 comments
+## How to Create and Manipulate Lists and Data frames in R
+
 Lists and Data frames in R
 
 A List is an “object” in R that consist of a collection of other objects known as components.
@@ -702,8 +702,8 @@ Mango 8
 
 
 
-Reading Data from Files in R
-31 comments
+## Reading Data from Files in R
+
 Reading data from files
 
 Introduction
@@ -885,8 +885,8 @@ $ Petal.Width : num 0.2 0.4 0.2 0.2 0.4 0.4 0.3 0.3 0.3 0.2 ...
 $ Species : Factor w/ 3 levels "setosa","versicolor",..: 1 1 1 1 1 1 1 1 1 1 .
 
 
-Querying and Manipulating Data from Files Using Dedicated Packages in R
-23 comments
+## Querying and Manipulating Data from Files Using Dedicated Packages in R
+
 Querying and manipulating data from existing files
 Introduction
 
@@ -1055,8 +1055,8 @@ number of FALSE items
 [1] 150
 
 
-Making Simple Plots in R
-6 comments
+## Making Simple Plots in R
+
 Introduction
 
 The majority of us have long been in the habit of using Excel to make plots. This is still fine for some small data sets, but for large data sets, it is really complicated to load data in Excel and manipulate it. Moreover, Excel is prone to errors when manipulating the data when it comes to filtering, arranging, or querying complex data. This is without even mentioning the complexity of generating and arranging plots in a publishable way.
@@ -1248,7 +1248,7 @@ Expected output:
 
 
 
-Bioinformatics - What is RStudio
+## What is RStudio
 [00:00:00.47] [MUSIC PLAYING]
 [00:00:07.52] At this stage of the course, you should be able now to easily create variables, or
 read and manipulate data frames, as well as creating simple graphs with ease. This is because all
@@ -1321,8 +1321,8 @@ in R to do so.
 [00:06:51.88] In the next video, or step, we will start learning together how to use RStudio. 
 
 
-Data Visualisation Packages and Principles - a Focus on ggplot2
-1 comment
+## Data Visualisation Packages and Principles - a Focus on ggplot2
+
 As we saw, much of what is done with R can also be done in RStudio.
 
 Data Visualization in RStudio
@@ -1359,8 +1359,8 @@ COORDINATES	customizes the coordinates
 LABELS	sets plot title, legend or axis names
 layers of grammar presented as parallel layers of different elements
 
-Data Visualisation with ggplot2 - Setting Data, Aesthetics and Geometries
-7 comments
+## Data Visualisation with ggplot2 - Setting Data, Aesthetics and Geometries
+
 Making data visualisations in RStudio.
 
 Data Visualisation with ggplot2
