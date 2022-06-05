@@ -23,3 +23,27 @@ qiime tools import \
 --input-format PairedEndFastqManifestPhred33
 
 
+
+##Denoising using dada2
+
+#Using dada2
+qiime dada2 denoise-paired \
+--i-demultiplexed-seqs demux.qza \
+--p-trim-left-f 17 \
+--p-trim-left-r 17 \
+--p-trunc-len-f 250 \
+--p-trunc-len-r 200 \
+--o-table dada2-table.qza \
+--o-representative-sequences rep-seqs-dada2.qza \
+--o-denoising-stats dada2-denoise-stats.qza
+
+#Adding metadata and examining count tables
+qiime feature-table summarize \
+--i-table dada2-table.qza \
+--o-visualization dada2-table.qzv \
+--m-sample-metadata-file ./zanzibar1.tsv
+
+qiime feature-table tabulate-seqs \
+--i-data rep-seqs-dada2.qza \
+--o-visualization rep-seqs-dada2.qzv
+
