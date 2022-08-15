@@ -50,7 +50,7 @@ multiqc ./
 ![image](https://drive.google.com/uc?export=view&id=16PVcXEgFDOPdwWc7hWoC9PQzNXqYN1hR)
 
 ## Importing data into qiime
-Why qiime? The microbiome data contain sequences, and transitioning from raw sequence data to useful results often requires significant work, but computational tools such as QIIME2 have made it much easier. 
+Why qiime? The microbiome data contain sequences, and transitioning from raw sequence data to useful results often requires significant work, but computational tools such as QIIME2 have made it much easier.    
 QIIME2 is a microbiome analysis package that could translate raw sequence data into useful statistical results
 
 ```
