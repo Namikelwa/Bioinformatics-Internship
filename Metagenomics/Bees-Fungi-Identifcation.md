@@ -21,9 +21,18 @@ cd ../fastqc-results
 #run multiqc
 multiqc ./
 ```
-![image](https://drive.google.com/uc?export=view&id=1ULdnBnlEjWjMDQqiyqtTodNi4xzLnOEF) 
+From the multiqc [report](file:///home/icipe/Desktop/Fungi_Identification/results/multiqc_report.html).
 
-![image](https://drive.google.com/uc?export=view&id=12r3y4d0cKRGVMGYrn_w1C0b-DbZvPFWB)  
+ I found to have sequences of the length 301bp. With relatively good quality
+
+![postmultiqc_qualityscores](https://user-images.githubusercontent.com/78470415/118993543-4475d680-b98e-11eb-9ed6-c12f343766a7.png)
+
+ However, from the adapter content, we had three troublesome reads or samples.
+
+They showed high adapter content, which are of the type Nextera PE-PE.fa
+
+![fastqc_adapter_content_plot](https://user-images.githubusercontent.com/78470415/118993369-21e3bd80-b98e-11eb-998a-7f3bbefc2288.png)
+
 
 ## Quality control
 Trimmed using trimmomatic
@@ -45,9 +54,21 @@ mv *R*.fastq.gz ../trimmed-reads
 fastqc -o postfastqc *.fastq.gz
 multiqc ./
 ```
-![image](https://drive.google.com/uc?export=view&id=1s0QSleko5s6URCR60nTe83ntAB7c1UWp) 
+[post_trimmommatic_fastqc_report](file:///home/icipe/Desktop/Fungi_Identification/scratchpad/Zanzibar2_magroov_L001_R1_pair_001_fastqc.html#M4)   
 
-![image](https://drive.google.com/uc?export=view&id=16PVcXEgFDOPdwWc7hWoC9PQzNXqYN1hR)
+
+From the results, the adapters were cut out, and overall quality improved.
+Here is the adapter content results.
+
+![Zanzibar 2 adapter content](assets/markdown-img-paste-20210520125748110.png)
+
+However, the lengths are still not similar, ranging from 10 to 301bp. This will, however, be dealt with denoising steps.
+## Importing and denoising
+
+To import data into qiime, you will need to have a manifest file; this can be challenging, especially when you have many samples, so doing it manually is out of the question. To understand the use of a manifest file, here is a link to the  qiime2 documentation page on
+
+[manifest files](https://docs.qiime2.org/2021.4/tutorials/importing/)   
+
 
 ## Importing data into qiime
 Why qiime? The microbiome data contain sequences, and transitioning from raw sequence data to useful results often requires significant work, but computational tools such as QIIME2 have made it much easier.    
