@@ -50,11 +50,15 @@ multiqc ./
 ![image](https://drive.google.com/uc?export=view&id=16PVcXEgFDOPdwWc7hWoC9PQzNXqYN1hR)
 
 ## Importing data into qiime
+Why qiime? The microbiome data contain sequences, and transitioning from raw sequence data to useful results often requires significant work, but computational tools such as QIIME2 have made it much easier. 
+QIIME2 is a microbiome analysis package that could translate raw sequence data into useful statistical results
+
 ```
 mkdir qiime
 cd qiime
 
 pip install send2trash
+# Using send2trash, we can send files to the Trash or Recycle Bin instead of permanently deleting them
 module load qiime2
 
 # Running automated python script 
