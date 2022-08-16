@@ -252,24 +252,15 @@ qiime taxa barplot \
 * Phyla present
 
 **SILVA**                                                                                        
-
-![image](https://drive.google.com/uc?export=view&id=1eBiAmFAoNLRblnvAUocaW1mdIY2WLiFy)
-
-**UNITE**
-
 ![Genus](https://user-images.githubusercontent.com/85280529/184815477-0a8ffe52-4617-43c9-b4bb-95359733b041.PNG)
 
-![Species Composition](https://user-images.githubusercontent.com/85280529/184815668-11f43a86-2264-4882-ac5f-6362becd94ba.PNG)
 
-* Graphical representation of the fungal species against the bee species
-
-**SILVA**
-
-![image](https://drive.google.com/uc?export=view&id=18PAzMtaDqysETEpaVx-faK0jZXKf3GvC)
 
 **UNITE**
 
-![image](https://drive.google.com/uc?export=view&id=1v-DDh0iX0CtPXTBhucMhEqHkEWus2KEU)
+![silva](https://user-images.githubusercontent.com/85280529/184886886-083073d3-f469-401d-a557-c95e2e1858ba.PNG)
+
+![silva species](https://user-images.githubusercontent.com/85280529/184886876-41f8200b-33a7-4ae7-8de8-06245d6faaa8.PNG)
 
 
 ## Discussion
@@ -301,7 +292,12 @@ The huge difference in the taxonomic representation between the two databases wo
 
 ## Computing diversity
 
-![shannon](https://user-images.githubusercontent.com/85280529/184815631-8b895b1a-402c-435b-871f-8cffc0f94dc9.PNG)
+
+![shannon](https://user-images.githubusercontent.com/85280529/184886738-0db1fa12-2b49-4df0-8675-c3c5c708422e.PNG)
+
+![diversity](https://user-images.githubusercontent.com/85280529/184886804-abc3e5c2-e7ae-40f0-9d2d-1d8a359bdd6a.PNG)
+
+![PCA](https://user-images.githubusercontent.com/85280529/184886824-450f2294-5abd-4cbb-bd75-3b640c70e406.PNG)
 
  
  Challenge | Solution
