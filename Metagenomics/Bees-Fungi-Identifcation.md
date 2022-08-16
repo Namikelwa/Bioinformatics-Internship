@@ -153,7 +153,7 @@ U | 72359
 HYPOSP1 | 37016
 HYPOSP3 | 7381
 
-![image](https://drive.google.com/uc?export=view&id=1D1_zo8LMqxqX4p__zpIjTqZCZ2qtoV4y) 
+![image](https://drive.google.com/uc?export=view&id=1D1_zo8LMqxqX4p__zpIjTqZCZ2qtoV4y)    
 
 ## Training a Classifier
 ### SILVA Database
@@ -257,8 +257,10 @@ qiime taxa barplot \
 
 **UNITE**
 
-![image](https://drive.google.com/uc?export=view&id=1Xoe9CvQMoFyD76DKrIockvFTTllLFMgC)
- 
+![Genus](https://user-images.githubusercontent.com/85280529/184815477-0a8ffe52-4617-43c9-b4bb-95359733b041.PNG)
+
+![Species Composition](https://user-images.githubusercontent.com/85280529/184815668-11f43a86-2264-4882-ac5f-6362becd94ba.PNG)
+
 * Graphical representation of the fungal species against the bee species
 
 **SILVA**
@@ -299,6 +301,7 @@ The huge difference in the taxonomic representation between the two databases wo
 
 ## Computing diversity
 
+![shannon](https://user-images.githubusercontent.com/85280529/184815631-8b895b1a-402c-435b-871f-8cffc0f94dc9.PNG)
 
  
  Challenge | Solution
